@@ -1,0 +1,66 @@
+# .cursor-rules
+
+# General Guidelines
+Always maintain modular, scalable, and reusable code.
+Use TypeScript across all files.
+Follow clean architecture and separation of concerns.
+
+# Styling
+Use Tailwind CSS utility classes — avoid inline styles or custom CSS unless necessary.
+Group Tailwind classes in a logical, readable order.
+
+# Framework
+Use Next.js App Router (Next.js 14+).
+Use Server Components by default. Use Client Components only when interactivity is required.
+Avoid using Pages Router unless explicitly migrating legacy content.
+
+# State Management
+Use React built-in state (useState, useReducer) and custom hooks. 
+Avoid external state libraries like Redux.
+
+# Data & Services
+Encapsulate business logic in `services/` folder using service functions.
+Use custom hooks in `hooks/` to connect UI and services.
+API calls should be abstracted into `services/api/`.
+
+# Components
+Component files go in `components/` and should be:
+- Small and focused
+- Co-located with their styles and tests
+- Client vs Server Components clearly marked
+
+# Charts
+Use D3.js for data visualization.
+Encapsulate chart logic in separate components under `components/charts/`.
+Keep chart rendering logic separate from data transformation logic.
+
+# Testing
+Use Vitest for unit testing.
+Use Playwright or Cypress for integration/e2e testing (optional).
+
+# File Naming & Conventions
+Use kebab-case for folders and file names.
+Use PascalCase for component names.
+Use camelCase for functions and variables.
+
+# Folder Structure
+Respect existing folder structure:
+- app/
+- components/
+- services/
+- hooks/
+- types/
+- utils/
+- tests/
+- public/
+- styles/
+
+# Azure Deployment
+Project must be deployable on Azure Static Web Apps or Azure App Service.
+All environment variables must be referenced using `process.env`.
+
+# Comments
+Prefer minimal, high-value comments.
+Let code be self-explanatory where possible.
+Use `// TODO:` for follow-up items and `// FIXME:` for technical debt.
+
