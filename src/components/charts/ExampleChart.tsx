@@ -55,8 +55,7 @@ const ExampleChart: React.FC<ChartProps> = ({
       .on('mouseover', function (event, d) {
         d3.select(this).style('opacity', 0.7);
         
-        const tooltip = d3
-          .select('body')
+        d3.select('body')
           .append('div')
           .attr('class', 'tooltip')
           .style('position', 'absolute')

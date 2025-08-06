@@ -37,3 +37,29 @@ export interface ChartProps {
     left: number;
   };
 }
+
+export type Project = {
+  name: string;
+  description: string;
+};
+
+export type SpanInfo = {
+  span: number;
+  length: number;
+  purlinSize: string;
+};
+
+export type SupportInfo = {
+  support: number;
+  lap: boolean;
+  leftPercentage: number;
+  rightPercentage: number;
+};
+
+export type BridgingSpacingInfo = {
+  span: number;
+  bridgings: number;
+  field1: number;
+  field2: number;
+  field3: number;
+};
