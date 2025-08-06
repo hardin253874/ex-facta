@@ -3,7 +3,7 @@ import React from 'react';
 // SpanType type definition for the 9 span types
 export type SpanType = 'spanType1' | 'spanType2' | 'spanType3' | 'spanType4' | 'spanType5' | 'spanType6' | 'spanType7' | 'spanType8' | 'spanType9';
 
-// SpanTypeSelector component for selecting from 9 different span types in a 3x3 grid
+// SpanTypeSelector component for selecting from 9 different span types in a vertical list
 interface SpanTypeSelectorProps {
   value: SpanType;
   onChange: (value: SpanType) => void;
@@ -18,38 +18,34 @@ const SpanTypeSelector: React.FC<SpanTypeSelectorProps> = ({ value, onChange }) 
   ];
 
   return (
-    <div 
-      className="grid grid-cols-3 gap-2"
-      role="radiogroup"
-      aria-label="Span type selection"
-    >
+    <div className="border p-2 rounded">
+     <div className="flex flex-col items-center gap-1">
       {spanTypes.map((spanType, index) => {
         const spanNumber = index + 1;
         const isSelected = value === spanType;
-        
+
         return (
-          <button
+          <div
             key={spanType}
-            type="button"
+            role="button"
+            tabIndex={0}
             onClick={() => onChange(spanType)}
-            aria-pressed={isSelected}
-            className={`flex flex-col items-center p-2 rounded-lg transition-all duration-200 ${
-              isSelected
-                ? 'ring-2 ring-blue-500 bg-blue-50'
-                : 'hover:bg-gray-50'
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') onChange(spanType);
+            }}
+            className={`w-full max-w-full aspect-[382/36] flex items-center justify-center cursor-pointer ${
+              isSelected ? 'border-2 border-green-500' : 'border-transparent'
             }`}
           >
             <img
               src={`/images/span-type-${spanNumber}.jpg`}
               alt={`Span ${spanNumber}`}
-              className="w-16 h-16 object-cover rounded mb-2"
+              className="w-full h-full object-cover"
             />
-            <span className="text-sm font-medium text-gray-700">
-              Span {spanNumber}
-            </span>
-          </button>
+          </div>
         );
       })}
+    </div>
     </div>
   );
 };
