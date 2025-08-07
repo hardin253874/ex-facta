@@ -74,7 +74,7 @@ const Project: React.FC = () => {
                   />
                 </div>
 
-                {spanCount >= 1 && (
+                {spanCount > 1 && (
                   <>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -113,7 +113,7 @@ const Project: React.FC = () => {
               <PlanCanvas />
             </div>
 
-            {spanCount >= 1 && (
+            {spanCount > 1 && (
               <>
                 <div className="bg-white rounded-lg shadow-sm p-4">
                   <h2 className="text-lg font-semibold text-gray-900 mb-4">Span Configuration</h2>
