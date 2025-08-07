@@ -11,19 +11,26 @@ import SheetingRestraintSelector from '@/components/SheetingRestraintSelector';
 import SpanConfigTable from '@/components/SpanConfigTable';
 import SupportConfigTable from '@/components/SupportConfigTable';
 import BridgingConfigTable from '@/components/BridgingConfigTable';
-import type { Project, SpanInfo, SupportInfo, BridgingSpacingInfo } from '@/types';
+import type {
+  Project,
+  SpanInfo,
+  SupportInfo,
+  BridgingSpacingInfo,
+} from '@/types';
 
 const Project: React.FC = () => {
   // State management
   const [project, setProject] = useState<Project>({
     name: '',
-    description: ''
+    description: '',
   });
-  
+
   const [purlinType, setPurlinType] = useState<'typeC' | 'typeZ'>('typeC');
   const [spanType, setSpanType] = useState<SpanType>('spanType1');
   const [spanCount, setSpanCount] = useState<number>(0);
-  const [purlinSizeMode, setPurlinSizeMode] = useState<'checkPurlinSize' | 'findPurlinSize'>('findPurlinSize');
+  const [purlinSizeMode, setPurlinSizeMode] = useState<
+    'checkPurlinSize' | 'findPurlinSize'
+  >('findPurlinSize');
   const [sheetingRestrained, setSheetingRestrained] = useState<boolean>(false);
   const [spanInfos, setSpanInfos] = useState<SpanInfo[]>([]);
   const [supportInfos, setSupportInfos] = useState<SupportInfo[]>([]);
@@ -44,16 +51,18 @@ const Project: React.FC = () => {
           {/* Left Panel */}
           <div className="md:w-1/4 space-y-4">
             <div className="bg-white rounded-lg shadow-sm p-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Configuration</h2>
-              
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Configuration
+              </h2>
+
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Purlin Type
                   </label>
-                  <PurlinTypeSelector 
-                    value={purlinType} 
-                    onChange={setPurlinType} 
+                  <PurlinTypeSelector
+                    value={purlinType}
+                    onChange={setPurlinType}
                   />
                 </div>
 
@@ -61,17 +70,11 @@ const Project: React.FC = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Span Type
                   </label>
-                  <SpanTypeSelector 
-                    value={spanType} 
-                    onChange={setSpanType} 
-                  />
+                  <SpanTypeSelector value={spanType} onChange={setSpanType} />
                 </div>
 
                 <div>
-                  <SpanNumberInput 
-                    value={spanCount} 
-                    onChange={setSpanCount} 
-                  />
+                  <SpanNumberInput value={spanCount} onChange={setSpanCount} />
                 </div>
 
                 {spanCount > 1 && (
@@ -80,16 +83,16 @@ const Project: React.FC = () => {
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Purlin Size Mode
                       </label>
-                      <PurlinSizeModeSelector 
-                        value={purlinSizeMode} 
-                        onChange={setPurlinSizeMode} 
+                      <PurlinSizeModeSelector
+                        value={purlinSizeMode}
+                        onChange={setPurlinSizeMode}
                       />
                     </div>
 
                     <div>
-                      <SheetingRestraintSelector 
-                        value={sheetingRestrained} 
-                        onChange={setSheetingRestrained} 
+                      <SheetingRestraintSelector
+                        value={sheetingRestrained}
+                        onChange={setSheetingRestrained}
                       />
                     </div>
                   </>
@@ -101,23 +104,26 @@ const Project: React.FC = () => {
           {/* Right Panel */}
           <div className="md:w-3/4 space-y-4">
             <div className="bg-white rounded-lg shadow-sm p-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Project Details</h2>
-              <ProjectForm 
-                value={project} 
-                onChange={setProject} 
-              />
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Project Details
+              </h2>
+              <ProjectForm value={project} onChange={setProject} />
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Plan View</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Plan View
+              </h2>
               <PlanCanvas />
             </div>
 
             {spanCount > 1 && (
               <>
                 <div className="bg-white rounded-lg shadow-sm p-4">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Span Configuration</h2>
-                  <SpanConfigTable 
+                  <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                    Span Configuration
+                  </h2>
+                  <SpanConfigTable
                     numOfSpans={spanCount}
                     purlinSizeMode={purlinSizeMode}
                     value={spanInfos}
@@ -126,8 +132,10 @@ const Project: React.FC = () => {
                 </div>
 
                 <div className="bg-white rounded-lg shadow-sm p-4">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-4">Bridging Configuration</h2>
-                  <BridgingConfigTable 
+                  <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                    Bridging Configuration
+                  </h2>
+                  <BridgingConfigTable
                     numOfSpans={spanCount}
                     defaultSpacing={useDefaultSpacing}
                     onDefaultSpacingChange={setUseDefaultSpacing}
@@ -138,8 +146,10 @@ const Project: React.FC = () => {
 
                 {purlinType === 'typeZ' && (
                   <div className="bg-white rounded-lg shadow-sm p-4">
-                    <h2 className="text-lg font-semibold text-gray-900 mb-4">Support Configuration</h2>
-                    <SupportConfigTable 
+                    <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                      Support Configuration
+                    </h2>
+                    <SupportConfigTable
                       numOfSpans={spanCount}
                       spanType={spanType}
                       value={supportInfos}
@@ -157,7 +167,7 @@ const Project: React.FC = () => {
           <p className="text-sm text-gray-500 mb-2">
             Only applicable to Stramit Exacta® purlins and Stramit® bridging
           </p>
-          <Link 
+          <Link
             href="/loadCases"
             className="text-blue-600 underline cursor-pointer text-sm hover:text-blue-800 transition-colors"
           >
@@ -169,4 +179,4 @@ const Project: React.FC = () => {
   );
 };
 
-export default Project; 
+export default Project;

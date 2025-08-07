@@ -6,9 +6,12 @@ interface PurlinTypeSelectorProps {
   onChange: (value: 'typeC' | 'typeZ') => void;
 }
 
-const PurlinTypeSelector: React.FC<PurlinTypeSelectorProps> = ({ value, onChange }) => {
+const PurlinTypeSelector: React.FC<PurlinTypeSelectorProps> = ({
+  value,
+  onChange,
+}) => {
   return (
-    <div 
+    <div
       className="flex border border-gray-200 rounded-lg overflow-hidden"
       role="radiogroup"
       aria-label="Purlin type selection"
@@ -52,4 +55,4 @@ const PurlinTypeSelector: React.FC<PurlinTypeSelectorProps> = ({ value, onChange
   );
 };
 
-export default PurlinTypeSelector; 
+export default PurlinTypeSelector;

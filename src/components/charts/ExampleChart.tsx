@@ -54,7 +54,7 @@ const ExampleChart: React.FC<ChartProps> = ({
       .attr('ry', 4)
       .on('mouseover', function (event, d) {
         d3.select(this).style('opacity', 0.7);
-        
+
         d3.select('body')
           .append('div')
           .attr('class', 'tooltip')
@@ -99,7 +99,10 @@ const ExampleChart: React.FC<ChartProps> = ({
 
     g.append('text')
       .attr('class', 'x-axis-label')
-      .attr('transform', `translate(${innerWidth / 2}, ${innerHeight + margin.bottom - 5})`)
+      .attr(
+        'transform',
+        `translate(${innerWidth / 2}, ${innerHeight + margin.bottom - 5})`
+      )
       .style('text-anchor', 'middle')
       .style('font-size', '12px')
       .style('fill', '#666')

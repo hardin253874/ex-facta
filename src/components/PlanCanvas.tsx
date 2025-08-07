@@ -10,11 +10,14 @@ const PlanCanvas: React.FC = () => {
     if (!svgRef.current) return;
 
     // Initialize D3 zoom behavior
-    const zoom = d3.zoom<SVGSVGElement, unknown>()
+    const zoom = d3
+      .zoom<SVGSVGElement, unknown>()
       .scaleExtent([0.1, 10]) // Min and max zoom scale
-      .on('zoom', (event) => {
+      .on('zoom', event => {
         // Apply zoom transform to the SVG
-        d3.select(svgRef.current!).select('g').attr('transform', event.transform);
+        d3.select(svgRef.current!)
+          .select('g')
+          .attr('transform', event.transform);
       });
 
     // Store zoom reference for external control
@@ -25,7 +28,6 @@ const PlanCanvas: React.FC = () => {
 
     // TODO: Add D3 drawing logic here later
     // This is where the actual visualization elements will be added
-
   }, []);
 
   const handleZoomIn = () => {
@@ -33,7 +35,9 @@ const PlanCanvas: React.FC = () => {
       const currentTransform = d3.zoomTransform(svgRef.current);
       const newScale = currentTransform.k * 1.5;
       const newTransform = currentTransform.scale(newScale);
-      d3.select(svgRef.current).transition().call(zoomRef.current.transform, newTransform);
+      d3.select(svgRef.current)
+        .transition()
+        .call(zoomRef.current.transform, newTransform);
     }
   };
 
@@ -42,14 +46,18 @@ const PlanCanvas: React.FC = () => {
       const currentTransform = d3.zoomTransform(svgRef.current);
       const newScale = currentTransform.k / 1.5;
       const newTransform = currentTransform.scale(newScale);
-      d3.select(svgRef.current).transition().call(zoomRef.current.transform, newTransform);
+      d3.select(svgRef.current)
+        .transition()
+        .call(zoomRef.current.transform, newTransform);
     }
   };
 
   const handleZoomFit = () => {
     if (zoomRef.current && svgRef.current) {
       // Reset to identity transform (no zoom/pan)
-      d3.select(svgRef.current).transition().call(zoomRef.current.transform, d3.zoomIdentity);
+      d3.select(svgRef.current)
+        .transition()
+        .call(zoomRef.current.transform, d3.zoomIdentity);
     }
   };
 
@@ -67,7 +75,7 @@ const PlanCanvas: React.FC = () => {
           <g>
             {/* TODO: Add D3 visualization elements here */}
             {/* This is where the actual drawing will be implemented */}
-            
+
             {/* Placeholder text to show the canvas is working */}
             <text
               x="50%"
@@ -110,4 +118,4 @@ const PlanCanvas: React.FC = () => {
   );
 };
 
-export default PlanCanvas; 
+export default PlanCanvas;

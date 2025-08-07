@@ -7,8 +7,13 @@ interface LoadLocationComponentProps {
   onChange: (updated: LoadLocation) => void;
 }
 
-const LoadLocationComponent: React.FC<LoadLocationComponentProps> = ({ value, onChange }) => {
-  const handlePointOfReferenceChange = (pointOfReference: 'leftEnd' | 'rightEnd') => {
+const LoadLocationComponent: React.FC<LoadLocationComponentProps> = ({
+  value,
+  onChange,
+}) => {
+  const handlePointOfReferenceChange = (
+    pointOfReference: 'leftEnd' | 'rightEnd'
+  ) => {
     onChange({ ...value, PointOfReference: pointOfReference });
   };
 
@@ -28,8 +33,14 @@ const LoadLocationComponent: React.FC<LoadLocationComponentProps> = ({ value, on
 
       {/* Point of Reference */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Point of Reference</label>
-        <div className="flex gap-4" role="radiogroup" aria-label="Point of Reference">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Point of Reference
+        </label>
+        <div
+          className="flex gap-4"
+          role="radiogroup"
+          aria-label="Point of Reference"
+        >
           <button
             type="button"
             role="radio"
@@ -61,7 +72,9 @@ const LoadLocationComponent: React.FC<LoadLocationComponentProps> = ({ value, on
 
       {/* Length Type */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Length</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Length
+        </label>
         <div className="flex gap-4" role="radiogroup" aria-label="Length Type">
           <button
             type="button"
@@ -110,4 +123,4 @@ const LoadLocationComponent: React.FC<LoadLocationComponentProps> = ({ value, on
   );
 };
 
-export default LoadLocationComponent; 
+export default LoadLocationComponent;

@@ -10,7 +10,8 @@ const options = [
   {
     key: 'PLC' as const,
     label: 'Primary Load Cases (PLCs)',
-    description: 'Recommend 0.1kPa for dead load due to metal roofing and purlins',
+    description:
+      'Recommend 0.1kPa for dead load due to metal roofing and purlins',
   },
   {
     key: 'CLC' as const,
@@ -19,10 +20,17 @@ const options = [
   },
 ];
 
-const LoadCaseTypeSelector: React.FC<LoadCaseTypeSelectorProps> = ({ value, onChange }) => {
+const LoadCaseTypeSelector: React.FC<LoadCaseTypeSelectorProps> = ({
+  value,
+  onChange,
+}) => {
   return (
-    <div role="radiogroup" aria-label="Load case type selection" className="flex flex-col gap-4">
-      {options.map((option) => {
+    <div
+      role="radiogroup"
+      aria-label="Load case type selection"
+      className="flex flex-col gap-4"
+    >
+      {options.map(option => {
         const selected = value === option.key;
         return (
           <button

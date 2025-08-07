@@ -6,14 +6,17 @@ interface SheetingRestraintSelectorProps {
   onChange: (value: boolean) => void;
 }
 
-const SheetingRestraintSelector: React.FC<SheetingRestraintSelectorProps> = ({ value, onChange }) => {
+const SheetingRestraintSelector: React.FC<SheetingRestraintSelectorProps> = ({
+  value,
+  onChange,
+}) => {
   return (
     <div className="bg-gray-100 p-4 rounded">
       <label className="block text-sm font-medium mb-2 text-gray-700">
         Restraint from sheeting attached directly to purlin?
       </label>
-      
-      <div 
+
+      <div
         className="flex flex-row gap-4"
         role="radiogroup"
         aria-label="Sheeting restraint selection"
@@ -28,9 +31,7 @@ const SheetingRestraintSelector: React.FC<SheetingRestraintSelectorProps> = ({ v
             className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
             aria-checked={value === true}
           />
-          <span className="text-sm text-gray-700">
-            Yes
-          </span>
+          <span className="text-sm text-gray-700">Yes</span>
         </label>
 
         <label className="flex items-center gap-2 cursor-pointer">
@@ -43,13 +44,11 @@ const SheetingRestraintSelector: React.FC<SheetingRestraintSelectorProps> = ({ v
             className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
             aria-checked={value === false}
           />
-          <span className="text-sm text-gray-700">
-            No
-          </span>
+          <span className="text-sm text-gray-700">No</span>
         </label>
       </div>
     </div>
   );
 };
 
-export default SheetingRestraintSelector; 
+export default SheetingRestraintSelector;

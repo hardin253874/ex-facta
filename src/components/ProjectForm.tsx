@@ -11,22 +11,22 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ value, onChange }) => {
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange({
       ...value,
-      name: e.target.value
+      name: e.target.value,
     });
   };
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange({
       ...value,
-      description: e.target.value
+      description: e.target.value,
     });
   };
 
   return (
     <div className="flex flex-row gap-4 items-center">
       <div className="flex flex-col">
-        <label 
-          htmlFor="project-name" 
+        <label
+          htmlFor="project-name"
           className="block text-sm font-medium text-gray-700 mb-1"
         >
           Project:
@@ -41,8 +41,8 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ value, onChange }) => {
       </div>
 
       <div className="flex flex-col">
-        <label 
-          htmlFor="project-description" 
+        <label
+          htmlFor="project-description"
           className="block text-sm font-medium text-gray-700 mb-1"
         >
           Description:
@@ -59,4 +59,4 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ value, onChange }) => {
   );
 };
 
-export default ProjectForm; 
+export default ProjectForm;

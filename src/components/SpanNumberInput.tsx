@@ -6,10 +6,13 @@ interface SpanNumberInputProps {
   onChange: (value: number) => void;
 }
 
-const SpanNumberInput: React.FC<SpanNumberInputProps> = ({ value, onChange }) => {
+const SpanNumberInput: React.FC<SpanNumberInputProps> = ({
+  value,
+  onChange,
+}) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = parseInt(e.target.value, 10);
-    
+
     // Only allow valid numbers between 1 and 10
     if (!isNaN(inputValue) && inputValue >= 1 && inputValue <= 10) {
       onChange(inputValue);
@@ -18,8 +21,8 @@ const SpanNumberInput: React.FC<SpanNumberInputProps> = ({ value, onChange }) =>
 
   return (
     <div className="space-y-1">
-      <label 
-        htmlFor="span-number-input" 
+      <label
+        htmlFor="span-number-input"
         className="block text-sm font-medium text-gray-700"
       >
         No. of Spans
@@ -35,10 +38,7 @@ const SpanNumberInput: React.FC<SpanNumberInputProps> = ({ value, onChange }) =>
           className="w-20 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           aria-describedby="span-number-hint"
         />
-        <span 
-          id="span-number-hint" 
-          className="text-xs text-gray-500"
-        >
+        <span id="span-number-hint" className="text-xs text-gray-500">
           Max. 10
         </span>
       </div>
@@ -46,4 +46,4 @@ const SpanNumberInput: React.FC<SpanNumberInputProps> = ({ value, onChange }) =>
   );
 };
 
-export default SpanNumberInput; 
+export default SpanNumberInput;

@@ -21,7 +21,7 @@ const PrimaryLoadCasesComponent: React.FC = () => {
   const handleAddPLC = () => {
     if (plcs.length >= MAX_PLCS) return;
     const newPLC = createDefaultPLC(plcs.length);
-    setPLCs((prev) => [...prev, newPLC]);
+    setPLCs(prev => [...prev, newPLC]);
     setSelectedIdx(plcs.length);
   };
 
@@ -50,7 +50,9 @@ const PrimaryLoadCasesComponent: React.FC = () => {
   };
 
   // Change Deflection Limit
-  const handleDeflectionLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDeflectionLimitChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (selectedIdx === null) return;
     const value = parseFloat(e.target.value) || 0;
     const newPLCs = [...plcs];
@@ -62,9 +64,15 @@ const PrimaryLoadCasesComponent: React.FC = () => {
     <div className="flex gap-8">
       {/* Left: PLC Listbox */}
       <div className="w-56">
-        <label className="block text-sm font-medium text-gray-700 mb-2">Primary Load Cases</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Primary Load Cases
+        </label>
         <div className="border rounded h-64 overflow-y-auto bg-white">
-          <ul role="listbox" aria-label="Primary Load Cases" className="divide-y divide-gray-100">
+          <ul
+            role="listbox"
+            aria-label="Primary Load Cases"
+            className="divide-y divide-gray-100"
+          >
             {plcs.map((plc, idx) => (
               <li
                 key={idx}
@@ -72,10 +80,12 @@ const PrimaryLoadCasesComponent: React.FC = () => {
                 aria-selected={selectedIdx === idx}
                 tabIndex={0}
                 className={`px-4 py-2 cursor-pointer select-none transition-colors ${
-                  selectedIdx === idx ? 'bg-blue-100 font-semibold' : 'hover:bg-gray-50'
+                  selectedIdx === idx
+                    ? 'bg-blue-100 font-semibold'
+                    : 'hover:bg-gray-50'
                 }`}
                 onClick={() => setSelectedIdx(idx)}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === 'Enter' || e.key === ' ') setSelectedIdx(idx);
                 }}
               >
@@ -109,7 +119,9 @@ const PrimaryLoadCasesComponent: React.FC = () => {
         {selectedIdx !== null && plcs[selectedIdx] && (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Name
+              </label>
               <input
                 type="text"
                 value={plcs[selectedIdx].Name}
@@ -118,8 +130,14 @@ const PrimaryLoadCasesComponent: React.FC = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
-              <div className="flex gap-4" role="radiogroup" aria-label="PLC Type">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Type
+              </label>
+              <div
+                className="flex gap-4"
+                role="radiogroup"
+                aria-label="PLC Type"
+              >
                 <button
                   type="button"
                   role="radio"
@@ -149,14 +167,18 @@ const PrimaryLoadCasesComponent: React.FC = () => {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Deflection Limit</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Deflection Limit
+              </label>
               <input
                 type="number"
                 value={plcs[selectedIdx].DeflectionLimit}
                 onChange={handleDeflectionLimitChange}
                 disabled={plcs[selectedIdx].Type !== 'Serviceability'}
                 className={`w-32 px-3 py-2 border rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                  plcs[selectedIdx].Type !== 'Serviceability' ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : ''
+                  plcs[selectedIdx].Type !== 'Serviceability'
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : ''
                 }`}
                 min={0}
                 step={0.01}

@@ -21,7 +21,7 @@ const CombinedLoadCasesComponent: React.FC = () => {
   const handleAddCLC = () => {
     if (clcs.length >= MAX_CLCS) return;
     const newCLC = createDefaultCLC(clcs.length);
-    setCLCs((prev) => [...prev, newCLC]);
+    setCLCs(prev => [...prev, newCLC]);
     setSelectedIdx(clcs.length);
   };
 
@@ -50,7 +50,9 @@ const CombinedLoadCasesComponent: React.FC = () => {
   };
 
   // Change Deflection Limit
-  const handleDeflectionLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDeflectionLimitChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (selectedIdx === null) return;
     const value = parseInt(e.target.value) || 0;
     const newCLCs = [...clcs];
@@ -62,9 +64,15 @@ const CombinedLoadCasesComponent: React.FC = () => {
     <div className="space-y-4">
       {/* CLC Listbox */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Combined Load Cases</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Combined Load Cases
+        </label>
         <div className="border rounded h-64 overflow-y-auto bg-white">
-          <ul role="listbox" aria-label="Combined Load Cases" className="divide-y divide-gray-100">
+          <ul
+            role="listbox"
+            aria-label="Combined Load Cases"
+            className="divide-y divide-gray-100"
+          >
             {clcs.map((clc, idx) => (
               <li
                 key={idx}
@@ -72,10 +80,12 @@ const CombinedLoadCasesComponent: React.FC = () => {
                 aria-selected={selectedIdx === idx}
                 tabIndex={0}
                 className={`px-4 py-2 cursor-pointer select-none transition-colors ${
-                  selectedIdx === idx ? 'bg-blue-100 font-semibold' : 'hover:bg-gray-50'
+                  selectedIdx === idx
+                    ? 'bg-blue-100 font-semibold'
+                    : 'hover:bg-gray-50'
                 }`}
                 onClick={() => setSelectedIdx(idx)}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === 'Enter' || e.key === ' ') setSelectedIdx(idx);
                 }}
               >
@@ -108,7 +118,9 @@ const CombinedLoadCasesComponent: React.FC = () => {
       {selectedIdx !== null && clcs[selectedIdx] && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Name
+            </label>
             <input
               type="text"
               value={clcs[selectedIdx].Name}
@@ -118,7 +130,9 @@ const CombinedLoadCasesComponent: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Type
+            </label>
             <div className="flex gap-4" role="radiogroup" aria-label="CLC Type">
               <button
                 type="button"
@@ -149,14 +163,18 @@ const CombinedLoadCasesComponent: React.FC = () => {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Deflection Limit</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Deflection Limit
+            </label>
             <input
               type="number"
               value={clcs[selectedIdx].DeflectionLimit}
               onChange={handleDeflectionLimitChange}
               disabled={clcs[selectedIdx].Type !== 'Serviceability'}
               className={`w-32 px-3 py-2 border rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                clcs[selectedIdx].Type !== 'Serviceability' ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : ''
+                clcs[selectedIdx].Type !== 'Serviceability'
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : ''
               }`}
               min={0}
               step={1}
@@ -168,4 +186,4 @@ const CombinedLoadCasesComponent: React.FC = () => {
   );
 };
 
-export default CombinedLoadCasesComponent; 
+export default CombinedLoadCasesComponent;

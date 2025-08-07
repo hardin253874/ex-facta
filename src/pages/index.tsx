@@ -16,7 +16,7 @@ const Home: React.FC = () => {
       </Head>
 
       <div className="text-center">
-        <Link 
+        <Link
           href="/project"
           className="inline-block bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
         >

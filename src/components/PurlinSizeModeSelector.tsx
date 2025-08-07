@@ -6,9 +6,12 @@ interface PurlinSizeModeSelectorProps {
   onChange: (value: 'checkPurlinSize' | 'findPurlinSize') => void;
 }
 
-const PurlinSizeModeSelector: React.FC<PurlinSizeModeSelectorProps> = ({ value, onChange }) => {
+const PurlinSizeModeSelector: React.FC<PurlinSizeModeSelectorProps> = ({
+  value,
+  onChange,
+}) => {
   return (
-    <div 
+    <div
       className="bg-gray-100 p-4 rounded"
       role="radiogroup"
       aria-label="Purlin size mode selection"
@@ -20,7 +23,9 @@ const PurlinSizeModeSelector: React.FC<PurlinSizeModeSelectorProps> = ({ value, 
             name="purlin-size-mode"
             value="checkPurlinSize"
             checked={value === 'checkPurlinSize'}
-            onChange={(e) => onChange(e.target.value as 'checkPurlinSize' | 'findPurlinSize')}
+            onChange={e =>
+              onChange(e.target.value as 'checkPurlinSize' | 'findPurlinSize')
+            }
             className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
             aria-checked={value === 'checkPurlinSize'}
           />
@@ -35,7 +40,9 @@ const PurlinSizeModeSelector: React.FC<PurlinSizeModeSelectorProps> = ({ value, 
             name="purlin-size-mode"
             value="findPurlinSize"
             checked={value === 'findPurlinSize'}
-            onChange={(e) => onChange(e.target.value as 'checkPurlinSize' | 'findPurlinSize')}
+            onChange={e =>
+              onChange(e.target.value as 'checkPurlinSize' | 'findPurlinSize')
+            }
             className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
             aria-checked={value === 'findPurlinSize'}
           />
@@ -48,4 +55,4 @@ const PurlinSizeModeSelector: React.FC<PurlinSizeModeSelectorProps> = ({ value, 
   );
 };
 
-export default PurlinSizeModeSelector; 
+export default PurlinSizeModeSelector;

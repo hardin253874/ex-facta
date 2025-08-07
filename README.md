@@ -63,17 +63,20 @@ Before running this project, make sure you have the following installed:
 ## 🚀 Getting Started
 
 1. **Clone the repository** (if from git):
+
    ```bash
    git clone <repository-url>
    cd ex-facta
    ```
 
 2. **Install dependencies**:
+
    ```bash
    pnpm install
    ```
 
 3. **Run the development server**:
+
    ```bash
    pnpm dev
    ```
@@ -93,21 +96,27 @@ Before running this project, make sure you have the following installed:
 ## 🎨 Key Components
 
 ### ExampleChart
+
 Interactive D3.js bar chart component located in `src/components/charts/ExampleChart.tsx`. Features:
+
 - Responsive SVG rendering
 - Interactive tooltips
 - Customizable dimensions and margins
 - Color-coded data visualization
 
 ### MaterialCard
+
 Displays material information in a clean, card-based layout:
+
 - Material properties and specifications
 - Sustainability scoring with visual indicators
 - Cost information and use cases
 - Responsive design for all screen sizes
 
 ### Material Service
+
 Handles data fetching and management:
+
 - Mock data service with realistic material information
 - Async/await pattern for future API integration
 - TypeScript interfaces for type safety
@@ -115,6 +124,7 @@ Handles data fetching and management:
 ## 🌱 Sustainability Features
 
 Ex-Facta emphasizes sustainable material selection through:
+
 - Sustainability scoring system (0-100%)
 - Environmental impact factors
 - Carbon footprint considerations

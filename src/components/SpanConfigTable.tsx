@@ -9,18 +9,18 @@ interface SpanConfigTableProps {
   onChange: (value: SpanInfo[]) => void;
 }
 
-const SpanConfigTable: React.FC<SpanConfigTableProps> = ({ 
-  numOfSpans, 
-  purlinSizeMode, 
-  value, 
-  onChange 
+const SpanConfigTable: React.FC<SpanConfigTableProps> = ({
+  numOfSpans,
+  purlinSizeMode,
+  value,
+  onChange,
 }) => {
   const handleLengthChange = (index: number, newLength: number) => {
     if (newLength > 0) {
       const updatedValue = [...value];
       updatedValue[index] = {
         ...updatedValue[index],
-        length: newLength
+        length: newLength,
       };
       onChange(updatedValue);
     }
@@ -30,12 +30,15 @@ const SpanConfigTable: React.FC<SpanConfigTableProps> = ({
     const updatedValue = [...value];
     updatedValue[index] = {
       ...updatedValue[index],
-      purlinSize: newPurlinSize
+      purlinSize: newPurlinSize,
     };
     onChange(updatedValue);
   };
 
-  const purlinSizeOptions = Array.from({ length: 10 }, (_, i) => `Size ${i + 1}`);
+  const purlinSizeOptions = Array.from(
+    { length: 10 },
+    (_, i) => `Size ${i + 1}`
+  );
 
   return (
     <div className="overflow-x-auto">
@@ -58,11 +61,11 @@ const SpanConfigTable: React.FC<SpanConfigTableProps> = ({
             const spanInfo = value[index] || {
               span: index + 1,
               length: 0,
-              purlinSize: 'Size 1'
+              purlinSize: 'Size 1',
             };
-            
+
             return (
-              <tr 
+              <tr
                 key={index}
                 className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
               >
@@ -76,7 +79,9 @@ const SpanConfigTable: React.FC<SpanConfigTableProps> = ({
                     type="number"
                     min="1"
                     value={spanInfo.length}
-                    onChange={(e) => handleLengthChange(index, parseInt(e.target.value) || 0)}
+                    onChange={e =>
+                      handleLengthChange(index, parseInt(e.target.value) || 0)
+                    }
                     className="w-24 px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     aria-label={`Length for span ${spanInfo.span}`}
                   />
@@ -84,12 +89,14 @@ const SpanConfigTable: React.FC<SpanConfigTableProps> = ({
                 <td className="px-4 py-2 border-b border-gray-200">
                   <select
                     value={spanInfo.purlinSize}
-                    onChange={(e) => handlePurlinSizeChange(index, e.target.value)}
+                    onChange={e =>
+                      handlePurlinSizeChange(index, e.target.value)
+                    }
                     disabled={purlinSizeMode === 'findPurlinSize'}
                     className="w-24 px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500"
                     aria-label={`Purlin size for span ${spanInfo.span}`}
                   >
-                    {purlinSizeOptions.map((option) => (
+                    {purlinSizeOptions.map(option => (
                       <option key={option} value={option}>
                         {option}
                       </option>
@@ -105,4 +112,4 @@ const SpanConfigTable: React.FC<SpanConfigTableProps> = ({
   );
 };
 
-export default SpanConfigTable; 
+export default SpanConfigTable;

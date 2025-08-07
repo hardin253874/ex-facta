@@ -17,7 +17,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({ material }) => {
           {material.category}
         </span>
       </div>
-      
+
       <p className="text-secondary-600 text-sm mb-4 line-clamp-2">
         {material.description}
       </p>
@@ -29,7 +29,7 @@ const MaterialCard: React.FC<MaterialCardProps> = ({ material }) => {
             {formatCurrency(material.cost)}
           </span>
         </div>
-        
+
         <div className="flex justify-between items-center text-sm">
           <span className="text-secondary-600">Sustainability:</span>
           <div className="flex items-center">
@@ -52,7 +52,10 @@ const MaterialCard: React.FC<MaterialCardProps> = ({ material }) => {
         </h4>
         <div className="space-y-1">
           {material.properties.slice(0, 2).map((property, index) => (
-            <div key={index} className="flex justify-between text-xs text-secondary-600">
+            <div
+              key={index}
+              className="flex justify-between text-xs text-secondary-600"
+            >
               <span>{property.name}:</span>
               <span>
                 {property.value} {property.unit}

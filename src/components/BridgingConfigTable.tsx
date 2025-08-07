@@ -10,31 +10,49 @@ interface BridgingConfigTableProps {
   onChange: (value: BridgingSpacingInfo[]) => void;
 }
 
-const BridgingConfigTable: React.FC<BridgingConfigTableProps> = ({ 
-  numOfSpans, 
-  defaultSpacing, 
-  onDefaultSpacingChange, 
-  value, 
-  onChange 
+const BridgingConfigTable: React.FC<BridgingConfigTableProps> = ({
+  numOfSpans,
+  defaultSpacing,
+  onDefaultSpacingChange,
+  value,
+  onChange,
 }) => {
   const handleBridgingsChange = (index: number, newBridgings: number) => {
     const updatedValue = [...value];
+    const currentItem = updatedValue[index] || {
+      span: index + 1,
+      bridgings: 0,
+      field1: 0,
+      field2: 0,
+      field3: 0,
+    };
     updatedValue[index] = {
-      ...updatedValue[index],
+      ...currentItem,
       bridgings: newBridgings,
       // Reset fields that are no longer needed
-      field1: newBridgings >= 1 ? updatedValue[index].field1 : 0,
-      field2: newBridgings >= 2 ? updatedValue[index].field2 : 0,
-      field3: newBridgings >= 3 ? updatedValue[index].field3 : 0
+      field1: newBridgings >= 1 ? currentItem.field1 : 0,
+      field2: newBridgings >= 2 ? currentItem.field2 : 0,
+      field3: newBridgings >= 3 ? currentItem.field3 : 0,
     };
     onChange(updatedValue);
   };
 
-  const handleFieldChange = (index: number, field: 'field1' | 'field2' | 'field3', newValue: number) => {
+  const handleFieldChange = (
+    index: number,
+    field: 'field1' | 'field2' | 'field3',
+    newValue: number
+  ) => {
     const updatedValue = [...value];
+    const currentItem = updatedValue[index] || {
+      span: index + 1,
+      bridgings: 0,
+      field1: 0,
+      field2: 0,
+      field3: 0,
+    };
     updatedValue[index] = {
-      ...updatedValue[index],
-      [field]: newValue
+      ...currentItem,
+      [field]: newValue,
     };
     onChange(updatedValue);
   };
@@ -103,11 +121,11 @@ const BridgingConfigTable: React.FC<BridgingConfigTableProps> = ({
                 bridgings: 0,
                 field1: 0,
                 field2: 0,
-                field3: 0
+                field3: 0,
               };
-              
+
               return (
-                <tr 
+                <tr
                   key={index}
                   className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
                 >
@@ -119,13 +137,15 @@ const BridgingConfigTable: React.FC<BridgingConfigTableProps> = ({
                   <td className="px-4 py-2 border-b border-gray-200">
                     <select
                       value={bridgingInfo.bridgings}
-                      onChange={(e) => handleBridgingsChange(index, parseInt(e.target.value))}
+                      onChange={e =>
+                        handleBridgingsChange(index, parseInt(e.target.value))
+                      }
                       disabled={defaultSpacing}
                       className="w-20 px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500 disabled:cursor-not-allowed"
                       aria-label={`Bridgings for span ${bridgingInfo.span}`}
                       aria-disabled={defaultSpacing}
                     >
-                      {bridgingOptions.map((option) => (
+                      {bridgingOptions.map(option => (
                         <option key={option} value={option}>
                           {option}
                         </option>
@@ -138,7 +158,13 @@ const BridgingConfigTable: React.FC<BridgingConfigTableProps> = ({
                         type="number"
                         step="0.01"
                         value={bridgingInfo.field1}
-                        onChange={(e) => handleFieldChange(index, 'field1', parseFloat(e.target.value) || 0)}
+                        onChange={e =>
+                          handleFieldChange(
+                            index,
+                            'field1',
+                            parseFloat(e.target.value) || 0
+                          )
+                        }
                         disabled={defaultSpacing}
                         className="w-20 px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500 disabled:cursor-not-allowed"
                         aria-label={`Column 1 for span ${bridgingInfo.span}`}
@@ -152,7 +178,13 @@ const BridgingConfigTable: React.FC<BridgingConfigTableProps> = ({
                         type="number"
                         step="0.01"
                         value={bridgingInfo.field2}
-                        onChange={(e) => handleFieldChange(index, 'field2', parseFloat(e.target.value) || 0)}
+                        onChange={e =>
+                          handleFieldChange(
+                            index,
+                            'field2',
+                            parseFloat(e.target.value) || 0
+                          )
+                        }
                         disabled={defaultSpacing}
                         className="w-20 px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500 disabled:cursor-not-allowed"
                         aria-label={`Column 2 for span ${bridgingInfo.span}`}
@@ -166,7 +198,13 @@ const BridgingConfigTable: React.FC<BridgingConfigTableProps> = ({
                         type="number"
                         step="0.01"
                         value={bridgingInfo.field3}
-                        onChange={(e) => handleFieldChange(index, 'field3', parseFloat(e.target.value) || 0)}
+                        onChange={e =>
+                          handleFieldChange(
+                            index,
+                            'field3',
+                            parseFloat(e.target.value) || 0
+                          )
+                        }
                         disabled={defaultSpacing}
                         className="w-20 px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500 disabled:cursor-not-allowed"
                         aria-label={`Column 3 for span ${bridgingInfo.span}`}
@@ -184,4 +222,4 @@ const BridgingConfigTable: React.FC<BridgingConfigTableProps> = ({
   );
 };
 
-export default BridgingConfigTable; 
+export default BridgingConfigTable;

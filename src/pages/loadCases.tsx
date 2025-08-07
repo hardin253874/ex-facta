@@ -8,7 +8,7 @@ import type { Project } from '@/types';
 const LoadCases: React.FC = () => {
   const [project, setProject] = useState<Project>({
     name: '',
-    description: ''
+    description: '',
   });
 
   return (
@@ -25,7 +25,9 @@ const LoadCases: React.FC = () => {
           {/* Left Panel */}
           <div className="md:w-1/4 space-y-4">
             <div className="bg-white rounded-lg shadow-sm p-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Load Case Settings</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Load Case Settings
+              </h2>
 
               {/* 🔧 Placeholder: Replace with LoadCaseTypeSelector, PLCListManager, etc. */}
               <p className="text-sm text-gray-500">
@@ -37,15 +39,16 @@ const LoadCases: React.FC = () => {
           {/* Right Panel */}
           <div className="md:w-3/4 space-y-4">
             <div className="bg-white rounded-lg shadow-sm p-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Project Details</h2>
-              <ProjectForm 
-                value={project} 
-                onChange={setProject} 
-              />
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Project Details
+              </h2>
+              <ProjectForm value={project} onChange={setProject} />
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Plan View</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Plan View
+              </h2>
               <PlanCanvas />
             </div>
           </div>
@@ -53,11 +56,14 @@ const LoadCases: React.FC = () => {
 
         {/* Footer */}
         <div className="mt-8 flex justify-between">
-          <Link href="/project" className="text-blue-600 underline text-sm hover:text-blue-800">
+          <Link
+            href="/project"
+            className="text-blue-600 underline text-sm hover:text-blue-800"
+          >
             ← Return to Editing Spans
           </Link>
 
-          <button 
+          <button
             className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition"
             disabled
           >

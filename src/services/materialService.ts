@@ -5,7 +5,8 @@ const mockMaterials: Material[] = [
     id: '1',
     name: 'Recycled Steel',
     category: 'Metals',
-    description: 'High-quality recycled steel with excellent structural properties',
+    description:
+      'High-quality recycled steel with excellent structural properties',
     properties: [
       { name: 'Tensile Strength', value: 400, unit: 'MPa' },
       { name: 'Density', value: 7.85, unit: 'g/cm³' },
@@ -49,7 +50,11 @@ const mockMaterials: Material[] = [
     cost: 120,
     sustainability: {
       score: 60,
-      factors: ['Long lifespan', 'Local sourcing possible', 'High embodied energy'],
+      factors: [
+        'Long lifespan',
+        'Local sourcing possible',
+        'High embodied energy',
+      ],
     },
   },
 ];
