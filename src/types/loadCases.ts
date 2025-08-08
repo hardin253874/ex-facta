@@ -23,3 +23,26 @@ export type LoadLocation = {
   LengthType: 'mm' | 'length';
   Length: number;
 };
+
+export type Load = {
+  LoadType: 'UDL' | 'Point' | 'Line';
+  LoadDirection: 'parallel' | 'perpendicular' | '';
+  LoadApplication: 'part' | 'one' | 'multiple' | 'all' | '';
+  Units: 'kN/m' | 'kN' | 'kPa' | '';
+  Force: number;
+};
+
+export type AxialLoad = {
+  Value: number;
+  Type: 'Tension' | 'Compression';
+};
+
+export type MovingLoad = {
+  LeftBound: LoadLocation;
+  RightBound: LoadLocation;
+  WidthMM: number;
+  Units: 'kN/m' | 'kPa';
+  PressureKPa: number;
+  PurlinSpacingMM: number;
+  NumTestPositions: number;
+};
