@@ -1,7 +1,7 @@
 // src/types/loadCases.ts
 export type LoadCase = {
   Name: string;
-};
+} & Load;
 
 export type PrimaryLoadCase = {
   Name: string;

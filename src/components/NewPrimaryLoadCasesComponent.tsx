@@ -3,15 +3,23 @@
 import React, { useState, useEffect } from 'react';
 import { PrimaryLoadCase, LoadCase } from '../types/loadCases';
 
-interface NewPrimaryLoadCasesComponentProps {
+export interface NewPrimaryLoadCasesComponentProps {
   value: PrimaryLoadCase;
   onChange: (updated: PrimaryLoadCase) => void;
+  selectedIndex?: number | null;
+  onSelectIndex?: (index: number | null) => void;
+  onAddAxialRequested?: (selectedIndex: number) => void;
+  onEditMovingRequested?: (selectedIndex: number) => void;
 }
 
 const NewPrimaryLoadCasesComponent: React.FC<
   NewPrimaryLoadCasesComponentProps
-> = ({ value, onChange }) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+> = ({ value, onChange, selectedIndex: externalSelectedIndex, onSelectIndex, onAddAxialRequested, onEditMovingRequested }) => {
+  const [internalSelectedIndex, setInternalSelectedIndex] = useState<number | null>(null);
+  
+  // Use external selection if provided, otherwise use internal
+  const selectedIndex = externalSelectedIndex !== undefined ? externalSelectedIndex : internalSelectedIndex;
+  const setSelectedIndex = onSelectIndex || setInternalSelectedIndex;
 
   // Auto-select first item when list is not empty
   useEffect(() => {
@@ -29,6 +37,11 @@ const NewPrimaryLoadCasesComponent: React.FC<
 
     const newLoadCase: LoadCase = {
       Name: `Load ${value.Cases.length + 1}`,
+      LoadType: 'UDL',
+      LoadDirection: '',
+      LoadApplication: '',
+      Units: '',
+      Force: 0,
     };
 
     const updatedCases = [...value.Cases, newLoadCase];
@@ -58,11 +71,15 @@ const NewPrimaryLoadCasesComponent: React.FC<
   };
 
   const handleAddAxialLoad = () => {
-    // No functional behavior yet
+    if (selectedIndex !== null) {
+      onAddAxialRequested?.(selectedIndex);
+    }
   };
 
   const handleEditMovingLoad = () => {
-    // No functional behavior yet
+    if (selectedIndex !== null) {
+      onEditMovingRequested?.(selectedIndex);
+    }
   };
 
   const handleSelectionChange = (index: number) => {
@@ -134,16 +151,28 @@ const NewPrimaryLoadCasesComponent: React.FC<
 
         {/* Row 2: Add Axial Load */}
         <button
+          type="button"
           onClick={handleAddAxialLoad}
-          className="w-full px-3 py-2 text-sm font-medium text-blue-700 bg-white border border-blue-300 rounded-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+          disabled={selectedIndex === null}
+          className={`w-full px-3 py-2 text-sm font-medium rounded-md border transition-colors ${
+            selectedIndex === null
+              ? 'text-gray-400 bg-gray-200 border-gray-300 cursor-not-allowed'
+              : 'text-blue-700 bg-white border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500'
+          }`}
         >
           Add Axial Load
         </button>
 
         {/* Row 3: Edit Moving Load */}
         <button
+          type="button"
           onClick={handleEditMovingLoad}
-          className="w-full px-3 py-2 text-sm font-medium text-blue-700 bg-white border border-blue-300 rounded-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+          disabled={selectedIndex === null}
+          className={`w-full px-3 py-2 text-sm font-medium rounded-md border transition-colors ${
+            selectedIndex === null
+              ? 'text-gray-400 bg-gray-200 border-gray-300 cursor-not-allowed'
+              : 'text-blue-700 bg-white border-blue-300 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500'
+          }`}
         >
           Edit Moving Load
         </button>
