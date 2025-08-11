@@ -1,63 +1,74 @@
 import React, { useState } from 'react';
 import type { CombinedLoadCase } from '@/types/loadCases';
 
-// CombinedLoadCasesComponent manages a list of Combined Load Cases (CLCs) with editing and configuration
+interface CombinedLoadCasesComponentProps {
+  value: CombinedLoadCase[];
+  onChange: (value: CombinedLoadCase[]) => void;
+  onNewRequested?: (newCLC: CombinedLoadCase) => void;
+  selectedIndex: number | null;
+  onSelectionChange: (index: number | null) => void;
+  primaryLoadCases: any[];
+}
+
 const MAX_CLCS = 20;
 
-const defaultCLCName = (index: number) => `C. Load Case ${index + 1}`;
-
-const createDefaultCLC = (index: number): CombinedLoadCase => ({
-  Name: defaultCLCName(index),
-  Cases: [],
-  Type: 'Strength',
-  DeflectionLimit: 0,
-});
-
-const CombinedLoadCasesComponent: React.FC = () => {
-  const [clcs, setCLCs] = useState<CombinedLoadCase[]>([]);
-  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+const CombinedLoadCasesComponent: React.FC<CombinedLoadCasesComponentProps> = ({ 
+  value, 
+  onChange, 
+  onNewRequested,
+  selectedIndex,
+  onSelectionChange,
+  primaryLoadCases
+}) => {
 
   // Add new CLC
   const handleAddCLC = () => {
-    if (clcs.length >= MAX_CLCS) return;
-    const newCLC = createDefaultCLC(clcs.length);
-    setCLCs(prev => [...prev, newCLC]);
-    setSelectedIdx(clcs.length);
+    if (value.length >= MAX_CLCS) return;
+    const newCLC: CombinedLoadCase = {
+      Name: `C. Load Case ${value.length + 1}`,
+      Cases: [],
+      Type: 'Strength',
+      DeflectionLimit: 0
+    };
+    const updatedCLCs = [...value, newCLC];
+    onChange(updatedCLCs);
+    onSelectionChange(updatedCLCs.length - 1);
+    onNewRequested?.(newCLC);
   };
 
   // Delete selected CLC
   const handleDeleteCLC = () => {
-    if (selectedIdx === null) return;
-    const newCLCs = clcs.filter((_, idx) => idx !== selectedIdx);
-    setCLCs(newCLCs);
-    setSelectedIdx(newCLCs.length === 0 ? null : Math.max(0, selectedIdx - 1));
+    if (selectedIndex === null) return;
+    const updatedCLCs = value.filter((_, idx) => idx !== selectedIndex);
+    onChange(updatedCLCs);
+    onSelectionChange(updatedCLCs.length === 0 ? null : Math.max(0, selectedIndex - 1));
   };
 
   // Rename CLC
   const handleRename = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (selectedIdx === null) return;
-    const newCLCs = [...clcs];
-    newCLCs[selectedIdx] = { ...newCLCs[selectedIdx], Name: e.target.value };
-    setCLCs(newCLCs);
+    if (selectedIndex === null) return;
+    const updatedCLCs = [...value];
+    updatedCLCs[selectedIndex] = { ...updatedCLCs[selectedIndex], Name: e.target.value };
+    onChange(updatedCLCs);
   };
 
   // Change CLC Type
   const handleTypeChange = (type: 'Strength' | 'Serviceability') => {
-    if (selectedIdx === null) return;
-    const newCLCs = [...clcs];
-    newCLCs[selectedIdx] = { ...newCLCs[selectedIdx], Type: type };
-    setCLCs(newCLCs);
+    if (selectedIndex === null) return;
+    const updatedCLCs = [...value];
+    updatedCLCs[selectedIndex] = { ...updatedCLCs[selectedIndex], Type: type };
+    onChange(updatedCLCs);
   };
 
   // Change Deflection Limit
   const handleDeflectionLimitChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (selectedIdx === null) return;
-    const value = parseInt(e.target.value) || 0;
-    const newCLCs = [...clcs];
-    newCLCs[selectedIdx] = { ...newCLCs[selectedIdx], DeflectionLimit: value };
-    setCLCs(newCLCs);
+    if (selectedIndex === null) return;
+    const deflectionValue = parseInt(e.target.value) || 0;
+    const updatedCLCs = [...value];
+    updatedCLCs[selectedIndex] = { ...updatedCLCs[selectedIndex], DeflectionLimit: deflectionValue };
+    onChange(updatedCLCs);
   };
 
   return (
@@ -73,20 +84,20 @@ const CombinedLoadCasesComponent: React.FC = () => {
             aria-label="Combined Load Cases"
             className="divide-y divide-gray-100"
           >
-            {clcs.map((clc, idx) => (
+            {value.map((clc, idx) => (
               <li
                 key={idx}
                 role="option"
-                aria-selected={selectedIdx === idx}
+                aria-selected={selectedIndex === idx}
                 tabIndex={0}
                 className={`px-4 py-2 cursor-pointer select-none transition-colors ${
-                  selectedIdx === idx
+                  selectedIndex === idx
                     ? 'bg-blue-100 font-semibold'
                     : 'hover:bg-gray-50'
                 }`}
-                onClick={() => setSelectedIdx(idx)}
+                onClick={() => onSelectionChange(idx)}
                 onKeyDown={e => {
-                  if (e.key === 'Enter' || e.key === ' ') setSelectedIdx(idx);
+                  if (e.key === 'Enter' || e.key === ' ') onSelectionChange(idx);
                 }}
               >
                 {clc.Name}
@@ -99,7 +110,7 @@ const CombinedLoadCasesComponent: React.FC = () => {
             type="button"
             className="flex-1 px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm disabled:opacity-50"
             onClick={handleAddCLC}
-            disabled={clcs.length >= MAX_CLCS}
+            disabled={value.length >= MAX_CLCS}
           >
             New CLC
           </button>
@@ -107,7 +118,7 @@ const CombinedLoadCasesComponent: React.FC = () => {
             type="button"
             className="flex-1 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm disabled:opacity-50"
             onClick={handleDeleteCLC}
-            disabled={selectedIdx === null}
+            disabled={selectedIndex === null}
           >
             Delete
           </button>
@@ -115,7 +126,7 @@ const CombinedLoadCasesComponent: React.FC = () => {
       </div>
 
       {/* CLC Details */}
-      {selectedIdx !== null && clcs[selectedIdx] && (
+      {selectedIndex !== null && value[selectedIndex] && (
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -123,7 +134,7 @@ const CombinedLoadCasesComponent: React.FC = () => {
             </label>
             <input
               type="text"
-              value={clcs[selectedIdx].Name}
+              value={value[selectedIndex].Name}
               onChange={handleRename}
               maxLength={15}
               className="w-full px-3 py-2 border rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -137,9 +148,9 @@ const CombinedLoadCasesComponent: React.FC = () => {
               <button
                 type="button"
                 role="radio"
-                aria-checked={clcs[selectedIdx].Type === 'Strength'}
+                aria-checked={value[selectedIndex].Type === 'Strength'}
                 className={`px-4 py-2 rounded border text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                  clcs[selectedIdx].Type === 'Strength'
+                  value[selectedIndex].Type === 'Strength'
                     ? 'bg-blue-100 ring-2 ring-blue-500 font-semibold border-blue-400'
                     : 'bg-white border-gray-300 hover:bg-gray-50'
                 }`}
@@ -150,9 +161,9 @@ const CombinedLoadCasesComponent: React.FC = () => {
               <button
                 type="button"
                 role="radio"
-                aria-checked={clcs[selectedIdx].Type === 'Serviceability'}
+                aria-checked={value[selectedIndex].Type === 'Serviceability'}
                 className={`px-4 py-2 rounded border text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                  clcs[selectedIdx].Type === 'Serviceability'
+                  value[selectedIndex].Type === 'Serviceability'
                     ? 'bg-blue-100 ring-2 ring-blue-500 font-semibold border-blue-400'
                     : 'bg-white border-gray-300 hover:bg-gray-50'
                 }`}
@@ -168,11 +179,11 @@ const CombinedLoadCasesComponent: React.FC = () => {
             </label>
             <input
               type="number"
-              value={clcs[selectedIdx].DeflectionLimit}
+              value={value[selectedIndex].DeflectionLimit}
               onChange={handleDeflectionLimitChange}
-              disabled={clcs[selectedIdx].Type !== 'Serviceability'}
+              disabled={value[selectedIndex].Type !== 'Serviceability'}
               className={`w-32 px-3 py-2 border rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                clcs[selectedIdx].Type !== 'Serviceability'
+                value[selectedIndex].Type !== 'Serviceability'
                   ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   : ''
               }`}

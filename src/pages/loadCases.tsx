@@ -6,6 +6,8 @@ import PlanCanvas from '@/components/PlanCanvas';
 import LoadCaseTypeSelector from '@/components/LoadCaseTypeSelector';
 import PrimaryLoadCasesComponent from '@/components/PrimaryLoadCasesComponent';
 import CombinedLoadCasesComponent from '@/components/CombinedLoadCasesComponent';
+import NewPrimaryLoadCasesComponent from '@/components/NewPrimaryLoadCasesComponent';
+import NewCombinedLoadCasesComponent from '@/components/NewCombinedLoadCasesComponent';
 import type { Project } from '@/types';
 import type { PrimaryLoadCase, CombinedLoadCase, LoadCase } from '@/types/loadCases';
 
@@ -18,21 +20,18 @@ const LoadCases: React.FC = () => {
   // Selected load-case mode
   const [loadCaseType, setLoadCaseType] = useState<'PLC' | 'CLC'>('PLC');
 
-  // PLC object under edit
-  const [primaryPLC, setPrimaryPLC] = useState<PrimaryLoadCase>({
-    Name: 'P. Load Case 1',
-    Cases: [] as LoadCase[],
-    Type: 'Strength',
-    DeflectionLimit: 0
-  });
+  // Lists of load cases
+  const [primaryLoadCases, setPrimaryLoadCases] = useState<PrimaryLoadCase[]>([]);
+  const [combinedLoadCases, setCombinedLoadCases] = useState<CombinedLoadCase[]>([]);
 
-  // CLC object under edit
-  const [combinedCLC, setCombinedCLC] = useState<CombinedLoadCase>({
-    Name: 'C. Load Case 1',
-    Cases: [] as LoadCase[],
-    Type: 'Strength',
-    DeflectionLimit: 0
-  });
+  // Selected indices
+  const [selectedPLCIndex, setSelectedPLCIndex] = useState<number | null>(null);
+  const [selectedCLCIndex, setSelectedCLCIndex] = useState<number | null>(null);
+
+  // Right panel editor mode
+  const [rightEditorMode, setRightEditorMode] = useState<'plc' | 'clc' | null>(null);
+  const [rightEditorPLC, setRightEditorPLC] = useState<PrimaryLoadCase | null>(null);
+  const [rightEditorCLC, setRightEditorCLC] = useState<CombinedLoadCase | null>(null);
 
   // Optional: source list for building a CLC (can be fed from PLCs later)
   const [availablePrimaryLoads, setAvailablePrimaryLoads] = useState<LoadCase[]>([]);
@@ -62,25 +61,35 @@ const LoadCases: React.FC = () => {
                 onChange={setLoadCaseType}
               />
 
-              {/* PLC Editor (only when PLC selected) */}
+              {/* PLC List (only when PLC selected) */}
               {loadCaseType === 'PLC' && (
                 <div className="mt-6">
-                  <h3 className="text-sm font-medium text-gray-800 mb-2">Primary Load Cases (Max. 20)</h3>
                   <PrimaryLoadCasesComponent
-                    value={primaryPLC}
-                    onChange={setPrimaryPLC}
+                    value={primaryLoadCases}
+                    onChange={setPrimaryLoadCases}
+                    selectedIndex={selectedPLCIndex}
+                    onSelectionChange={setSelectedPLCIndex}
+                    onNewRequested={(newPLC) => {
+                      setRightEditorMode('plc');
+                      setRightEditorPLC(newPLC);
+                    }}
                   />
                 </div>
               )}
 
-              {/* CLC Editor (only when CLC selected) */}
+              {/* CLC List (only when CLC selected) */}
               {loadCaseType === 'CLC' && (
                 <div className="mt-6">
-                  <h3 className="text-sm font-medium text-gray-800 mb-2">Combined Load Cases</h3>
                   <CombinedLoadCasesComponent
-                    value={combinedCLC}
-                    onChange={setCombinedCLC}
+                    value={combinedLoadCases}
+                    onChange={setCombinedLoadCases}
+                    selectedIndex={selectedCLCIndex}
+                    onSelectionChange={setSelectedCLCIndex}
                     primaryLoadCases={availablePrimaryLoads}
+                    onNewRequested={(newCLC) => {
+                      setRightEditorMode('clc');
+                      setRightEditorCLC(newCLC);
+                    }}
                   />
                 </div>
               )}
@@ -125,6 +134,32 @@ const LoadCases: React.FC = () => {
               </h2>
               <PlanCanvas />
             </div>
+
+            {/* Editor Panel */}
+            {rightEditorMode === 'plc' && rightEditorPLC && (
+              <div className="bg-white rounded-lg shadow-sm p-4">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                  Edit Primary Load Case
+                </h2>
+                <NewPrimaryLoadCasesComponent
+                  value={rightEditorPLC}
+                  onChange={setRightEditorPLC}
+                />
+              </div>
+            )}
+
+            {rightEditorMode === 'clc' && rightEditorCLC && (
+              <div className="bg-white rounded-lg shadow-sm p-4">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                  Edit Combined Load Case
+                </h2>
+                <NewCombinedLoadCasesComponent
+                  value={rightEditorCLC}
+                  onChange={setRightEditorCLC}
+                  primaryLoadCases={availablePrimaryLoads}
+                />
+              </div>
+            )}
           </div>
         </div>
 
