@@ -57,7 +57,7 @@ const LoadCases: React.FC = () => {
   });
 
   // Optional: source list for building a CLC (can be fed from PLCs later)
-  const [availablePrimaryLoads, setAvailablePrimaryLoads] = useState<LoadCase[]>([]);
+  const [availablePrimaryLoads] = useState<LoadCase[]>([]);
 
   // Comments
   const [caseComments, setCaseComments] = useState<string>('');

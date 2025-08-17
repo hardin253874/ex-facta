@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import type { PrimaryLoadCase, LoadCase } from '@/types/loadCases';
+import React from 'react';
+import type { PrimaryLoadCase } from '@/types/loadCases';
 
 interface PrimaryLoadCasesComponentProps {
   value: PrimaryLoadCase[];

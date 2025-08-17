@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { CombinedLoadCase } from '@/types/loadCases';
 
 interface CombinedLoadCasesComponentProps {
@@ -18,7 +18,7 @@ const CombinedLoadCasesComponent: React.FC<CombinedLoadCasesComponentProps> = ({
   onNewRequested,
   selectedIndex,
   onSelectionChange,
-  primaryLoadCases
+  primaryLoadCases: _primaryLoadCases
 }) => {
 
   // Add new CLC

@@ -10,6 +10,10 @@ Ex-Facta is a structural engineering application for purlin design and load case
 ex-facta/
 ├── src/
 │   ├── components/           # React components
+│   │   ├── layout/          # Layout components
+│   │   │   ├── AppHeader.tsx
+│   │   │   ├── AppFooter.tsx
+│   │   │   └── index.ts     # Barrel exports
 │   │   ├── BridgingConfigTable.tsx
 │   │   ├── CombinedLoadCasesComponent.tsx
 │   │   ├── Header.tsx
@@ -28,15 +32,21 @@ ex-facta/
 │   ├── pages/               # Next.js pages
 │   │   ├── index.tsx       # Landing page with "Enter Projects" link
 │   │   ├── project.tsx     # Main project configuration page
-│   │   └── loadCases.tsx   # Load cases configuration page
+│   │   ├── loadCases.tsx   # Load cases configuration page
+│   │   └── menu.tsx        # Main menu page with full-screen background
 │   ├── types/              # TypeScript type definitions
 │   │   ├── index.ts        # Main types (Material, Project, SpanInfo, etc.)
 │   │   └── loadCases.ts    # Load case related types
 │   └── services/           # API services
-└── public/images/          # Project assets (purlin icons, span type images)
+└── public/images/          # Project assets (purlin icons, span type images, background, logo)
 ```
 
 ## Key Components Implemented
+
+### Layout Components
+
+- **AppHeader**: Reusable header component with EX-facta branding, peach background (#FFD9B7), and three configurable text lines (title, version, tagline)
+- **AppFooter**: Responsive footer with copyright text (left) and Stramit logo (right), includes white background with transparency
 
 ### Core Purlin Design Components
 
@@ -124,6 +134,15 @@ Main configuration interface with:
 
 Load case management interface with primary and combined load case components
 
+### Menu Page (`pages/menu.tsx`)
+
+Main menu page featuring:
+- Full-viewport background image from `/images/background.jpg`
+- AppHeader with EX-facta branding in peach color
+- AppFooter with Stramit branding
+- Semantic HTML structure with proper landmarks
+- Responsive layout ready for future menu button additions
+
 ## Development Notes
 
 ### Component Design Patterns
@@ -143,6 +162,7 @@ Load case management interface with primary and combined load case components
 ### Styling Approach
 
 - Tailwind CSS utility classes
+- Custom brand colors: `brand.peach` (#FFD9B7) for header backgrounds
 - Consistent spacing with space-y-4, gap-4 patterns
 - Highlight selected items with bg-yellow-200, ring-2 styles
 - Responsive design with md: breakpoints
@@ -152,6 +172,7 @@ Load case management interface with primary and combined load case components
 - Images stored in `/public/images/`
 - Purlin type icons: `icon-exacta-c.jpg`, `icon-exacta-z.jpg`
 - Span type images: `span-type-1.jpg` through `span-type-9.jpg`
+- Branding assets: `stramit-logo.jpg` (footer logo), `background.jpg` (full-page background)
 
 ## Testing & Build Commands
 
