@@ -70,6 +70,16 @@ ex-facta/
 - **SheetingRestraintSelector**: Yes/No toggle for sheeting restraint
 - **PlanCanvas**: D3-based visualization placeholder with zoom controls
 
+### UI Components
+
+- **Modal**: Accessible modal component with:
+  - Focus trap implementation
+  - Keyboard navigation (ESC to close, Tab cycling)
+  - Backdrop click to close
+  - ARIA attributes for screen readers
+  - Dual text area sections with editable content
+  - Automatic focus management and restoration
+
 ## Type System
 
 ### Core Types (`src/types/index.ts`)
@@ -120,7 +130,16 @@ export type LoadLocation = {
 
 ### Landing Page (`pages/index.tsx`)
 
-Simple landing page with a single "Enter Projects" button linking to `/project`
+Professional disclaimer landing page featuring:
+- Full-viewport background image matching the menu page
+- AppHeader with EX-facta branding
+- AppFooter with Stramit branding
+- Two-column layout (responsive stacking on mobile):
+  - **Left**: Disclaimer panel with title bar and editable multiline textarea
+  - **Right**: Action buttons (Accept → `/menu`, Exit → attempts window.close())
+- Comprehensive disclaimer text for engineering software usage
+- Accessible design with proper labeling and focus management
+- Graceful Exit button fallback when window.close() is blocked by browser
 
 ### Project Configuration Page (`pages/project.tsx`)
 
@@ -140,8 +159,23 @@ Main menu page featuring:
 - Full-viewport background image from `/images/background.jpg`
 - AppHeader with EX-facta branding in peach color
 - AppFooter with Stramit branding
+- Seven interactive menu buttons in diamond/cluster layout:
+  - **Enter Projects**: Navigation link to `/project.tsx`
+  - **Exacta® Info**: Modal with product specifications and technical details
+  - **Stramit Info**: Modal with company history and current operations
+  - **Material Info**: Modal with steel properties and coating systems
+  - **Sample Specification**: Modal with design standards and installation guidelines
+  - **Photographs**: Modal with project gallery and installation examples
+  - **About Us**: Modal with mission statement and contact information
+- Accessible modal system with:
+  - Focus trapping and restoration
+  - ESC key and backdrop click to close
+  - Dual-section content with editable text areas
+  - Screen reader compatibility
+- Responsive design:
+  - Desktop: Positioned cluster layout approximating screenshot
+  - Mobile: 2-column grid fallback
 - Semantic HTML structure with proper landmarks
-- Responsive layout ready for future menu button additions
 
 ## Development Notes
 
