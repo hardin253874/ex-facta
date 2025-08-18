@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 // PurlinTypeSelector component for selecting between Exacta®-C and Exacta®-Z purlin types
 interface PurlinTypeSelectorProps {
@@ -26,9 +27,11 @@ const PurlinTypeSelector: React.FC<PurlinTypeSelectorProps> = ({
             : 'bg-white hover:bg-gray-50 text-gray-700'
         }`}
       >
-        <img
+        <Image
           src="/images/icon-exacta-c.jpg"
           alt="Exacta-C icon"
+          width={32}
+          height={32}
           className="w-8 h-8 object-cover rounded"
         />
         <span className="font-medium">Exacta®-C</span>
@@ -44,9 +47,11 @@ const PurlinTypeSelector: React.FC<PurlinTypeSelectorProps> = ({
             : 'bg-white hover:bg-gray-50 text-gray-700'
         }`}
       >
-        <img
+        <Image
           src="/images/icon-exacta-z.jpg"
           alt="Exacta-Z icon"
+          width={32}
+          height={32}
           className="w-8 h-8 object-cover rounded"
         />
         <span className="font-medium">Exacta®-Z</span>

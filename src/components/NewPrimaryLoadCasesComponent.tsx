@@ -42,7 +42,7 @@ const NewPrimaryLoadCasesComponent: React.FC<
     } else if (selectedIndex !== null && selectedIndex >= value.Cases.length) {
       setSelectedIndex(Math.max(0, value.Cases.length - 1));
     }
-  }, [value.Cases.length, selectedIndex]);
+  }, [value.Cases.length, selectedIndex, setSelectedIndex]);
 
   const handleNewLoad = () => {
     if (value.Cases.length >= 10) return;

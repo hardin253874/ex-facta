@@ -1,5 +1,5 @@
 import React from 'react';
-import type { CombinedLoadCase } from '@/types/loadCases';
+import type { CombinedLoadCase, PrimaryLoadCase } from '@/types/loadCases';
 
 interface CombinedLoadCasesComponentProps {
   value: CombinedLoadCase[];
@@ -7,7 +7,7 @@ interface CombinedLoadCasesComponentProps {
   onNewRequested?: (newCLC: CombinedLoadCase) => void;
   selectedIndex: number | null;
   onSelectionChange: (index: number | null) => void;
-  primaryLoadCases: any[];
+  primaryLoadCases: PrimaryLoadCase[];
 }
 
 const MAX_CLCS = 20;

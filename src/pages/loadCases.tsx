@@ -142,7 +142,7 @@ const LoadCases: React.FC = () => {
                     onChange={setCombinedLoadCases}
                     selectedIndex={selectedCLCIndex}
                     onSelectionChange={setSelectedCLCIndex}
-                    primaryLoadCases={availablePrimaryLoads}
+                    primaryLoadCases={primaryLoadCases}
                     onNewRequested={newCLC => {
                       setRightEditorMode('clc');
                       setRightEditorCLC(newCLC);

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 // SpanType type definition for the 9 span types
 export type SpanType =
@@ -55,9 +56,11 @@ const SpanTypeSelector: React.FC<SpanTypeSelectorProps> = ({
                 isSelected ? 'border-2 border-green-500' : 'border-transparent'
               }`}
             >
-              <img
+              <Image
                 src={`/images/span-type-${spanNumber}.jpg`}
                 alt={`Span ${spanNumber}`}
+                width={150}
+                height={100}
                 className="w-full h-full object-cover"
               />
             </div>
