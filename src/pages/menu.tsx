@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AppHeader } from '../components/layout';
@@ -10,7 +11,7 @@ type PopupSpec = {
   body2: string;
 };
 
-type PopupKey = 'exacta' | 'stramit' | 'material' | 'specification' | 'photographs' | 'about';
+type PopupKey = 'exacta' | 'stramit' | 'material' | 'specification' | 'about' | 'gallery';
 
 const POPUPS: Record<PopupKey, PopupSpec> = {
   exacta: {
@@ -37,17 +38,17 @@ const POPUPS: Record<PopupKey, PopupSpec> = {
     header2: "Installation Guidelines",
     body2: "Proper installation is critical for optimal performance and warranty compliance. Stramit provides detailed installation guidelines and technical support to ensure correct application of our products.\n\nInstallation Requirements:\n• Qualified installers recommended\n• Proper fastener selection and spacing\n• Adequate bearing and support conditions\n• Weather protection during installation\n• Quality control inspections\n\nTechnical support available:\n• Site visits and consultation\n• Installation training programs\n• Detailed installation manuals\n• 24/7 technical helpline"
   },
-  photographs: {
-    header1: "Project Gallery",
-    body1: "Explore our comprehensive gallery of completed projects showcasing the versatility and performance of Stramit products. From commercial warehouses to residential developments, our products have been successfully used in thousands of projects across Australia.\n\nProject Categories:\n• Industrial and warehouse facilities\n• Commercial buildings\n• Agricultural structures\n• Residential applications\n• Infrastructure projects\n\nHigh-resolution images and project details available for reference and inspiration.",
-    header2: "Installation Examples",
-    body2: "Detailed photographic documentation of proper installation techniques and best practices. These examples demonstrate correct application methods and help ensure optimal performance of Stramit products.\n\nAvailable Documentation:\n• Step-by-step installation photos\n• Before and after comparisons\n• Common installation mistakes to avoid\n• Quality control checkpoints\n• Finished project showcases\n\nUse these visual guides in conjunction with our technical documentation for successful project completion."
-  },
   about: {
     header1: "Our Mission",
     body1: "Stramit is committed to providing innovative, high-quality steel building products that exceed customer expectations while contributing to sustainable construction practices. We strive to be the preferred partner for builders, engineers, and architects across Australia.\n\nCore Values:\n• Quality excellence in all products\n• Customer service and support\n• Innovation and continuous improvement\n• Environmental responsibility\n• Safety in all operations\n\nOur team of experienced professionals is dedicated to helping you achieve successful project outcomes.",
     header2: "Contact Information",
     body2: "Get in touch with our experienced team for technical support, product information, or project consultation. We're here to help you select the right products and provide ongoing support throughout your project.\n\nHead Office:\nStramit Corporation Pty Ltd\n123 Industrial Drive\nMelbourne, VIC 3000\n\nPhone: 1800 STRAMIT (1800 787 264)\nEmail: info@stramit.com.au\nWebsite: www.stramit.com.au\n\nRegional offices and distributors located throughout Australia. Contact us to find your nearest representative."
+  },
+  gallery: {
+    header1: "Project Gallery",
+    body1: "Explore our comprehensive gallery of completed projects showcasing the versatility and performance of Stramit products. From commercial warehouses to residential developments, our products have been successfully used in thousands of projects across Australia.\n\nProject Categories:\n• Industrial and warehouse facilities\n• Commercial buildings\n• Agricultural structures\n• Residential applications\n• Infrastructure projects\n\nHigh-resolution images and project details available for reference and inspiration.",
+    header2: "Installation Examples",
+    body2: "Detailed photographic documentation of proper installation techniques and best practices. These examples demonstrate correct application methods and help ensure optimal performance of Stramit products.\n\nAvailable Documentation:\n• Step-by-step installation photos\n• Before and after comparisons\n• Common installation mistakes to avoid\n• Quality control checkpoints\n• Finished project showcases\n\nUse these visual guides in conjunction with our technical documentation for successful project completion."
   }
 };
 
@@ -206,6 +207,16 @@ const MenuPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative">
+      <Head>
+        <title>Ex-Facta Menu - Engineering Design Software</title>
+        <meta
+          name="description"
+          content="Main menu for Ex-Facta engineering design software - Access product information, specifications, and project tools"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       {/* Background Image */}
       <div className="fixed inset-0 z-0">
         <Image
@@ -222,141 +233,101 @@ const MenuPage: React.FC = () => {
       <div className="relative z-10 flex flex-col min-h-screen">
         <AppHeader />
         
-        <main className="flex-1 flex items-center justify-center px-4 py-8">
-          {/* Desktop Layout - Diamond/Stack Pattern */}
-          <div className="hidden md:block relative max-w-xl w-full">
-            {/* Enter Projects - Top Center */}
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2">
-              <Link href="/project" className="inline-block px-6 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200">
-                Enter Projects
-              </Link>
-            </div>
+        <main className="relative z-10 w-full py-8">
+          <div className="w-full px-4 md:px-6 lg:px-8">
+            {/* Two-column layout with 40/60 content split */}
+            <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-6 lg:gap-8 items-start">
+              {/* Left Column - Hero, Buttons, Copyright (40% width on large screens) */}
+              <div className="min-w-0 flex flex-col">
+                {/* Hero Banner - Sized for 40% column */}
+                <div className="relative w-full overflow-hidden h-[clamp(120px,20vw,300px)] rounded-xl">
+                  <Image
+                    src="/images/EX-facta-hero-banner.png"
+                    alt=""
+                    fill
+                    className="object-contain object-left"
+                    priority
+                    aria-hidden="true"
+                  />
+                </div>
 
-            {/* Exacta Info - Left of Top */}
-            <div className="absolute top-8 left-8">
-              <button
-                ref={(el) => buttonRefs.current['exacta'] = el}
-                onClick={() => handlePopupOpen('exacta')}
-                className="px-6 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200"
-              >
-                Exacta® Info
-              </button>
-            </div>
+                {/* Content Wrapper - grows to push copyright to bottom */}
+                <div className="flex-1 min-w-0 space-y-4 md:space-y-6">
+                  {/* Buttons Grid */}
+                  <div className="mt-6 grid grid-cols-2 gap-4">
+                    <button
+                      ref={(el) => buttonRefs.current['exacta'] = el}
+                      onClick={() => handlePopupOpen('exacta')}
+                      className="bg-black text-white font-semibold px-6 py-3 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50 transition-all duration-200"
+                    >
+                      Exacta® Info
+                    </button>
+                    
+                    <button
+                      ref={(el) => buttonRefs.current['stramit'] = el}
+                      onClick={() => handlePopupOpen('stramit')}
+                      className="bg-black text-white font-semibold px-6 py-3 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50 transition-all duration-200"
+                    >
+                      Stramit Info
+                    </button>
+                    
+                    <button
+                      ref={(el) => buttonRefs.current['material'] = el}
+                      onClick={() => handlePopupOpen('material')}
+                      className="bg-black text-white font-semibold px-6 py-3 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50 transition-all duration-200"
+                    >
+                      Material Info
+                    </button>
+                    
+                    <button
+                      ref={(el) => buttonRefs.current['specification'] = el}
+                      onClick={() => handlePopupOpen('specification')}
+                      className="bg-black text-white font-semibold px-6 py-3 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50 transition-all duration-200"
+                    >
+                      Sample Specification
+                    </button>
+                    
+                    <button
+                      ref={(el) => buttonRefs.current['about'] = el}
+                      onClick={() => handlePopupOpen('about')}
+                      className="bg-black text-white font-semibold px-6 py-3 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50 transition-all duration-200"
+                    >
+                      About Us
+                    </button>
+                    
+                    <button
+                      ref={(el) => buttonRefs.current['gallery'] = el}
+                      onClick={() => handlePopupOpen('gallery')}
+                      className="bg-black text-white font-semibold px-6 py-3 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black/50 transition-all duration-200"
+                    >
+                      Project Gallery
+                    </button>
+                  </div>
 
-            {/* Stramit Info - Right of Top */}
-            <div className="absolute top-8 right-8">
-              <button
-                ref={(el) => buttonRefs.current['stramit'] = el}
-                onClick={() => handlePopupOpen('stramit')}
-                className="px-6 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200"
-              >
-                Stramit Info
-              </button>
-            </div>
+                  {/* Enter Projects Button - Full Width */}
+                  <div className="mt-5">
+                    <Link
+                      href="/project"
+                      className="w-full inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-black font-semibold px-8 py-4 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 transition-all duration-200"
+                    >
+                      Enter Projects
+                    </Link>
+                  </div>
+                </div>
 
-            {/* Material Info - Center Under Top */}
-            <div className="absolute top-20 left-1/2 transform -translate-x-1/2">
-              <button
-                ref={(el) => buttonRefs.current['material'] = el}
-                onClick={() => handlePopupOpen('material')}
-                className="px-6 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200"
-              >
-                Material Info
-              </button>
-            </div>
+                {/* Copyright Line - Pinned to bottom */}
+                <p className="mt-2 text-xs text-gray-500">
+                  © Copyright Stramit Corporation Pty Ltd August 2025
+                </p>
+              </div>
 
-            {/* Sample Specification - Far Left Lower */}
-            <div className="absolute top-32 left-0">
-              <button
-                ref={(el) => buttonRefs.current['specification'] = el}
-                onClick={() => handlePopupOpen('specification')}
-                className="px-6 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200"
-              >
-                Sample Specification
-              </button>
-            </div>
-
-            {/* Photographs - Far Right Lower */}
-            <div className="absolute top-32 right-0">
-              <button
-                ref={(el) => buttonRefs.current['photographs'] = el}
-                onClick={() => handlePopupOpen('photographs')}
-                className="px-6 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200"
-              >
-                Photographs
-              </button>
-            </div>
-
-            {/* About Us - Center Lowest */}
-            <div className="absolute top-44 left-1/2 transform -translate-x-1/2">
-              <button
-                ref={(el) => buttonRefs.current['about'] = el}
-                onClick={() => handlePopupOpen('about')}
-                className="px-6 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200"
-              >
-                About Us
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Layout - 2-Column Grid */}
-          <div className="md:hidden w-full max-w-sm mx-auto">
-            <div className="grid grid-cols-2 gap-4">
-              <Link href="/project" className="col-span-2 text-center px-6 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200">
-                Enter Projects
-              </Link>
-              
-              <button
-                ref={(el) => buttonRefs.current['exacta'] = el}
-                onClick={() => handlePopupOpen('exacta')}
-                className="px-4 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200 text-sm"
-              >
-                Exacta® Info
-              </button>
-              
-              <button
-                ref={(el) => buttonRefs.current['stramit'] = el}
-                onClick={() => handlePopupOpen('stramit')}
-                className="px-4 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200 text-sm"
-              >
-                Stramit Info
-              </button>
-              
-              <button
-                ref={(el) => buttonRefs.current['material'] = el}
-                onClick={() => handlePopupOpen('material')}
-                className="px-4 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200 text-sm"
-              >
-                Material Info
-              </button>
-              
-              <button
-                ref={(el) => buttonRefs.current['specification'] = el}
-                onClick={() => handlePopupOpen('specification')}
-                className="px-4 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200 text-sm"
-              >
-                Sample Specification
-              </button>
-              
-              <button
-                ref={(el) => buttonRefs.current['photographs'] = el}
-                onClick={() => handlePopupOpen('photographs')}
-                className="px-4 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200 text-sm"
-              >
-                Photographs
-              </button>
-              
-              <button
-                ref={(el) => buttonRefs.current['about'] = el}
-                onClick={() => handlePopupOpen('about')}
-                className="col-span-2 px-4 py-3 bg-brand-peach text-black font-medium rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200 text-sm"
-              >
-                About Us
-              </button>
+              {/* Right Column - Empty for now (60% width on large screens) */}
+              <div className="min-w-0">
+                {/* Reserved space - empty for now */}
+              </div>
             </div>
           </div>
         </main>
-        
       </div>
 
       {/* Modal */}

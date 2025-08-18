@@ -163,23 +163,32 @@ Load case management interface with primary and combined load case components
 Main menu page featuring:
 - Full-viewport background image from `/images/background.png`
 - AppHeader with two-row layout (logo + banner design)
-- No footer component (removed for cleaner design)
-- Seven interactive menu buttons in diamond/cluster layout:
-  - **Enter Projects**: Navigation link to `/project.tsx`
+- CSS Grid layout with 40/60 content split (responsive stacking on mobile):
+  - **Left Column (40%)**: Hero banner → 2×3 button grid → Full-width Enter Projects button → Copyright line
+  - **Right Column (60%)**: Reserved empty space
+- Hero banner constrained to left column with responsive height using CSS clamp
+- Six black buttons with white text in 2×3 grid layout with custom corner styling:
+  - Row 1: **Exacta® Info**, **Stramit Info**
+  - Row 2: **Material Info**, **Sample Specification**  
+  - Row 3: **About Us**, **Project Gallery**
+- Full-width red **Enter Projects** button with black text (routes to `/project`)
+- Custom asymmetric button corner styling (square top-left/bottom-right, rounded top-right/bottom-left)
+- Accessible modal system with comprehensive content:
   - **Exacta® Info**: Modal with product specifications and technical details
   - **Stramit Info**: Modal with company history and current operations
   - **Material Info**: Modal with steel properties and coating systems
   - **Sample Specification**: Modal with design standards and installation guidelines
-  - **Photographs**: Modal with project gallery and installation examples
   - **About Us**: Modal with mission statement and contact information
-- Accessible modal system with:
+  - **Project Gallery**: Modal with project gallery and installation examples
+- Modal accessibility features:
   - Focus trapping and restoration
   - ESC key and backdrop click to close
   - Dual-section content with editable text areas
   - Screen reader compatibility
 - Responsive design:
-  - Desktop: Positioned cluster layout approximating screenshot
-  - Mobile: 2-column grid fallback
+  - Desktop: 40/60 grid split with left-column content organization
+  - Mobile: Single column stacking with full-width layout
+- Copyright line pinned to bottom of left column
 - Semantic HTML structure with proper landmarks
 
 ## Development Notes
