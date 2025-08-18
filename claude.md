@@ -134,11 +134,14 @@ export type LoadLocation = {
 
 Professional disclaimer landing page featuring:
 - Full-viewport background image (`/images/background.png`)
-- AppHeader with two-row layout design
+- AppHeader with two-row layout design (logo + banner)
 - No footer component (removed for cleaner design)
-- Two-column layout (responsive stacking on mobile):
-  - **Left**: Disclaimer panel with title bar and editable multiline textarea
-  - **Right**: Action buttons (Accept → `/menu`, Exit → attempts window.close())
+- CSS Grid layout with 40/60 content split (responsive stacking on mobile):
+  - **Left Column (40%)**: Hero banner → Disclaimer panel → Copyright line
+  - **Right Column (60%)**: Action buttons positioned at bottom-left corner
+- Hero banner constrained to left column with responsive height using CSS clamp
+- Disclaimer panel with title bar and editable multiline textarea with custom scrollbar
+- Brand red Accept and Exit buttons with hover states and accessibility features
 - Comprehensive disclaimer text for engineering software usage
 - Accessible design with proper labeling and focus management
 - Graceful Exit button fallback when window.close() is blocked by browser

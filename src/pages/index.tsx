@@ -77,112 +77,89 @@ By using this software, you acknowledge that you have read, understood, and agre
       <div className="relative z-10 flex flex-col min-h-screen">
         <AppHeader />
         
-        <main className="flex-1 flex items-center justify-center px-4 py-8">
-          <div className="w-full max-w-6xl mx-auto">
-            {/* Desktop Layout - Two Columns */}
-            <div className="hidden md:flex gap-8 items-start">
-              {/* Left Column - Disclaimer Panel */}
-              <div className="flex-1 max-w-2xl">
-                <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden">
-                  {/* Title Bar */}
-                  <div className="bg-gray-100 px-6 py-3 border-b border-gray-200">
-                    <label 
-                      htmlFor="disclaimer-text" 
-                      className="text-lg font-bold text-gray-900"
-                    >
-                      Disclaimer:
-                    </label>
-                  </div>
-                  
-                  {/* Disclaimer Content */}
-                  <div className="p-6">
-                    <textarea
-                      id="disclaimer-text"
-                      value={disclaimerText}
-                      onChange={(e) => setDisclaimerText(e.target.value)}
-                      className="w-full h-80 p-4 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-brand-peach focus:border-transparent text-sm leading-relaxed"
-                      placeholder="Disclaimer text will appear here..."
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column - Action Buttons */}
-              <div className="w-80 space-y-4">
-                <Link 
-                  href="/menu" 
-                  className="block w-full px-8 py-4 bg-brand-peach text-black font-medium text-center rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200"
-                >
-                  Accept
-                </Link>
-                
-                <button
-                  onClick={handleExit}
-                  className="w-full px-8 py-4 bg-gray-100 text-gray-800 font-medium rounded-lg border border-gray-300 shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-200"
-                >
-                  Exit
-                </button>
-
-                {/* Exit Message */}
-                {exitMessage && (
-                  <div className="p-3 bg-yellow-100 border border-yellow-300 rounded-md text-sm text-yellow-800">
-                    {exitMessage}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Mobile Layout - Stacked */}
-            <div className="md:hidden space-y-6">
-              {/* Disclaimer Panel */}
-              <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden">
-                {/* Title Bar */}
-                <div className="bg-gray-100 px-4 py-3 border-b border-gray-200">
-                  <label 
-                    htmlFor="disclaimer-text-mobile" 
-                    className="text-lg font-bold text-gray-900"
-                  >
-                    Disclaimer:
-                  </label>
-                </div>
-                
-                {/* Disclaimer Content */}
-                <div className="p-4">
-                  <textarea
-                    id="disclaimer-text-mobile"
-                    value={disclaimerText}
-                    onChange={(e) => setDisclaimerText(e.target.value)}
-                    className="w-full h-64 p-3 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-brand-peach focus:border-transparent text-sm leading-relaxed"
-                    placeholder="Disclaimer text will appear here..."
+        <main className="relative z-10 w-full py-8">
+          <div className="w-full px-4 md:px-6 lg:px-8">
+            {/* Two-column layout with 40/60 content split */}
+            <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-6 lg:gap-8 items-start">
+              {/* Left Column - Hero, Disclaimer, Copyright (40% width on large screens) */}
+              <div className="min-w-0 flex flex-col">
+                {/* Hero Banner - Sized for 40% column */}
+                <div className="relative w-full overflow-hidden h-[clamp(120px,20vw,300px)] rounded-xl">
+                  <Image
+                    src="/images/EX-facta-hero-banner.png"
+                    alt=""
+                    fill
+                    className="object-contain object-left"
+                    priority
+                    aria-hidden="true"
                   />
                 </div>
+
+                {/* Content Wrapper - grows to push copyright to bottom */}
+                <div className="flex-1 min-w-0 space-y-4 md:space-y-6">
+                  {/* Disclaimer Panel */}
+                  <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    {/* Title Bar - White background */}
+                    <div className="bg-white px-4 py-3 border-b border-gray-200 rounded-t-lg shadow-sm">
+                      <label 
+                        htmlFor="disclaimer-text" 
+                        className="text-lg font-bold text-black"
+                      >
+                        Disclaimer:
+                      </label>
+                    </div>
+                    
+                    {/* Disclaimer Content - Minimal padding */}
+                    <div className="p-0">
+                      <textarea
+                        id="disclaimer-text"
+                        value={disclaimerText}
+                        onChange={(e) => setDisclaimerText(e.target.value)}
+                        className="w-full h-[clamp(280px,34vh,440px)] p-4 border-0 resize-none focus:ring-2 focus:ring-brand-peach focus:outline-none text-sm leading-relaxed scrollbar-wide overflow-auto"
+                        placeholder="Disclaimer text will appear here..."
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Copyright Line - Pinned to bottom */}
+                <p className="mt-2 text-xs text-gray-500">
+                  © Copyright Stramit Corporation Pty Ltd August 2025
+                </p>
               </div>
 
-              {/* Action Buttons */}
-              <div className="space-y-4 max-w-sm mx-auto w-full">
-                <Link 
-                  href="/menu" 
-                  className="block w-full px-6 py-3 bg-brand-peach text-black font-medium text-center rounded-lg border border-orange-300 shadow-md hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-200"
-                >
-                  Accept
-                </Link>
+              {/* Right Column - Action Buttons (60% width on large screens) */}
+              <div className="min-w-0 flex flex-col justify-between min-h-full">
+                {/* Empty spacer div for top */}
+                <div></div>
                 
-                <button
-                  onClick={handleExit}
-                  className="w-full px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-lg border border-gray-300 shadow-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all duration-200"
-                >
-                  Exit
-                </button>
+                {/* Button group - bottom-left on desktop, left-aligned on mobile */}
+                <div className="mt-auto mb-8 ml-0 lg:ml-6 flex flex-col space-y-4 self-start">
+                  <Link 
+                    href="/menu" 
+                    className="inline-flex items-center justify-center font-bold px-10 py-3 text-white bg-brand-red hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none transition-all duration-200"
+                  >
+                    ACCEPT
+                  </Link>
+                  
+                  <button
+                    onClick={handleExit}
+                    className="inline-flex items-center justify-center font-bold px-10 py-3 text-white bg-brand-red hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none transition-all duration-200"
+                  >
+                    EXIT
+                  </button>
 
-                {/* Exit Message */}
-                {exitMessage && (
-                  <div className="p-3 bg-yellow-100 border border-yellow-300 rounded-md text-sm text-yellow-800">
-                    {exitMessage}
-                  </div>
-                )}
+                  {/* Exit Message */}
+                  {exitMessage && (
+                    <div className="p-3 bg-yellow-100 border border-yellow-300 rounded-md text-sm text-yellow-800 max-w-sm">
+                      {exitMessage}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
+
         </main>
         
       </div>
