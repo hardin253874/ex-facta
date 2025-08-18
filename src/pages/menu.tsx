@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AppHeader, AppFooter } from '../components/layout';
+import { AppHeader } from '../components/layout';
 
 type PopupSpec = {
   header1: string;
@@ -209,7 +209,7 @@ const MenuPage: React.FC = () => {
       {/* Background Image */}
       <div className="fixed inset-0 z-0">
         <Image
-          src="/images/background.jpg"
+          src="/images/background.png"
           alt=""
           fill
           className="object-cover"
@@ -357,7 +357,6 @@ const MenuPage: React.FC = () => {
           </div>
         </main>
         
-        <AppFooter />
       </div>
 
       {/* Modal */}

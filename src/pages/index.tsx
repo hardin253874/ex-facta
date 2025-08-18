@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import { AppHeader, AppFooter } from '../components/layout';
+import { AppHeader } from '../components/layout';
 
 const Home: React.FC = () => {
   const [disclaimerText, setDisclaimerText] = useState(
@@ -64,7 +64,7 @@ By using this software, you acknowledge that you have read, understood, and agre
       {/* Background Image */}
       <div className="fixed inset-0 z-0">
         <Image
-          src="/images/background.jpg"
+          src="/images/background.png"
           alt=""
           fill
           className="object-cover"
@@ -185,7 +185,6 @@ By using this software, you acknowledge that you have read, understood, and agre
           </div>
         </main>
         
-        <AppFooter />
       </div>
     </div>
   );

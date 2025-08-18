@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         brand: {
           peach: '#FFD9B7',
+          red: '#E4002B',
         },
         primary: {
           50: '#eff6ff',

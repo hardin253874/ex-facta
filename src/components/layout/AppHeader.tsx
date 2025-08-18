@@ -1,30 +1,43 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface AppHeaderProps {
-  title?: string;
-  version?: string;
-  tagline?: string;
   className?: string;
 }
 
 const AppHeader: React.FC<AppHeaderProps> = ({
-  title = "EX-facta™ design software",
-  version = "Version 1.5.3",
-  tagline = "exclusively for Stramit Exacta® purlins and Stramit® Bridging",
   className = "",
 }) => {
   return (
-    <header className={`bg-brand-peach py-6 px-4 ${className}`}>
-      <div className="max-w-7xl mx-auto text-center">
-        <h1 className="text-black text-2xl md:text-3xl font-bold mb-2">
-          {title}
-        </h1>
-        <p className="text-black text-lg md:text-xl mb-1">
-          {version}
-        </p>
-        <p className="text-black text-sm md:text-base">
-          {tagline}
-        </p>
+    <header className={`${className}`}>
+      {/* Row 1: White background with logo and text */}
+      <div className="bg-white py-2 md:py-3 px-4 overflow-hidden">
+        <div className="flex items-center">
+          <Image
+            src="/images/EX-facta-logo.png"
+            alt="EX-facta logo"
+            width={48}
+            height={48}
+            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain flex-shrink-0"
+            priority
+          />
+          <span className="ml-3 text-brand-red text-sm sm:text-base md:text-lg lg:text-xl font-bold whitespace-nowrap">
+            EX-facta™
+          </span>
+        </div>
+      </div>
+      
+      {/* Row 2: Banner image */}
+      <div className="relative w-full overflow-hidden" style={{ height: 'clamp(48px, 8vw, 96px)' }}>
+        <Image
+          src="/images/EX-facta-banner.png"
+          alt=""
+          fill
+          className="object-cover object-left"
+          sizes="100vw"
+          priority
+          aria-hidden="true"
+        />
       </div>
     </header>
   );

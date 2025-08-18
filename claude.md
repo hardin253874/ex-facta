@@ -12,7 +12,6 @@ ex-facta/
 │   ├── components/           # React components
 │   │   ├── layout/          # Layout components
 │   │   │   ├── AppHeader.tsx
-│   │   │   ├── AppFooter.tsx
 │   │   │   └── index.ts     # Barrel exports
 │   │   ├── BridgingConfigTable.tsx
 │   │   ├── CombinedLoadCasesComponent.tsx
@@ -38,15 +37,18 @@ ex-facta/
 │   │   ├── index.ts        # Main types (Material, Project, SpanInfo, etc.)
 │   │   └── loadCases.ts    # Load case related types
 │   └── services/           # API services
-└── public/images/          # Project assets (purlin icons, span type images, background, logo)
+└── public/images/          # Project assets (purlin icons, span type images, background.png, logo, banner)
 ```
 
 ## Key Components Implemented
 
 ### Layout Components
 
-- **AppHeader**: Reusable header component with EX-facta branding, peach background (#FFD9B7), and three configurable text lines (title, version, tagline)
-- **AppFooter**: Responsive footer with copyright text (left) and Stramit logo (right), includes white background with transparency
+- **AppHeader**: Two-row layout header component:
+  - Row 1: White background with left-aligned EX-facta logo icon and "EX-facta™" text
+  - Row 2: Full-width banner image (EX-facta-banner.png) that clips on right when viewport narrows, anchored left
+  - Responsive design ensuring left elements always remain visible
+  - Uses new assets: EX-facta-logo.png (1307×1136) and EX-facta-banner.png (10000×636)
 
 ### Core Purlin Design Components
 
@@ -131,9 +133,9 @@ export type LoadLocation = {
 ### Landing Page (`pages/index.tsx`)
 
 Professional disclaimer landing page featuring:
-- Full-viewport background image matching the menu page
-- AppHeader with EX-facta branding
-- AppFooter with Stramit branding
+- Full-viewport background image (`/images/background.png`)
+- AppHeader with two-row layout design
+- No footer component (removed for cleaner design)
 - Two-column layout (responsive stacking on mobile):
   - **Left**: Disclaimer panel with title bar and editable multiline textarea
   - **Right**: Action buttons (Accept → `/menu`, Exit → attempts window.close())
@@ -156,9 +158,9 @@ Load case management interface with primary and combined load case components
 ### Menu Page (`pages/menu.tsx`)
 
 Main menu page featuring:
-- Full-viewport background image from `/images/background.jpg`
-- AppHeader with EX-facta branding in peach color
-- AppFooter with Stramit branding
+- Full-viewport background image from `/images/background.png`
+- AppHeader with two-row layout (logo + banner design)
+- No footer component (removed for cleaner design)
 - Seven interactive menu buttons in diamond/cluster layout:
   - **Enter Projects**: Navigation link to `/project.tsx`
   - **Exacta® Info**: Modal with product specifications and technical details
@@ -239,3 +241,35 @@ Key dependencies include:
 ## Development Evolution
 
 The project was significantly evolved using Cursor IDE with detailed component specifications. Each component was built with specific requirements for accessibility, TypeScript typing, and Tailwind styling. The evolution document contains comprehensive specifications for each component's behavior, props, and UI requirements.
+
+### Recent Design Updates (AppHeader Redesign)
+
+**Header Component Redesign**:
+- Redesigned `AppHeader` with two-row layout matching new visual requirements
+- Row 1: White background with left-aligned EX-facta logo icon and "EX-facta™" text
+- Row 2: Full-width banner image that clips on right when viewport narrows (left-anchored)
+- Removed all previous props (title, version, tagline) for simplified, visual-focused design
+- Uses new assets: `EX-facta-logo.png` (1307×1136) and `EX-facta-banner.png` (10000×636)
+
+**Footer Component Removal**:
+- Deleted `AppFooter.tsx` component entirely for cleaner page design
+- Updated layout barrel exports to remove footer
+- Removed footer usage from both `pages/index.tsx` and `pages/menu.tsx`
+
+**Background Image Update**:
+- Updated both landing and menu pages to use `/images/background.png` instead of `.jpg`
+- Maintained existing full-viewport, object-cover behavior
+
+**Responsive Behavior**:
+- Logo and text in header row 1 never clip (flex-shrink-0, whitespace-nowrap)
+- Banner image in row 2 anchors left and clips right as viewport narrows (object-left)
+- No horizontal scrollbars introduced by design changes
+- Maintains accessibility with proper alt text and ARIA attributes
+
+**Brand Styling Refinements**:
+- Added brand red color (`#E4002B`) to Tailwind config under `brand.red`
+- Applied brand red to "EX-facta™" text in header for proper branding
+- Implemented responsive text sizing: `text-sm sm:text-base md:text-lg lg:text-xl`
+- Enhanced banner height control using CSS `clamp(48px, 8vw, 96px)` to prevent oversizing on wide screens
+- Banner remains left-anchored with right truncation, responsive but capped height
+- Improved vertical rhythm with responsive padding: `py-2 md:py-3`
