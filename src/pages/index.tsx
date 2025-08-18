@@ -29,11 +29,13 @@ By using this software, you acknowledge that you have read, understood, and agre
     try {
       // Attempt to close the window/tab
       window.close();
-      
+
       // If the close was blocked (common in modern browsers), provide fallback
       setTimeout(() => {
         if (!window.closed) {
-          setExitMessage('Please close this tab manually or use your browser\'s close button.');
+          setExitMessage(
+            "Please close this tab manually or use your browser's close button."
+          );
           // Optional: navigate to about:blank after showing message
           setTimeout(() => {
             window.location.href = 'about:blank';
@@ -42,7 +44,9 @@ By using this software, you acknowledge that you have read, understood, and agre
       }, 100);
     } catch (error) {
       // Fallback if window.close() throws an error
-      setExitMessage('Please close this tab manually or use your browser\'s close button.');
+      setExitMessage(
+        "Please close this tab manually or use your browser's close button."
+      );
       setTimeout(() => {
         window.location.href = 'about:blank';
       }, 3000);
@@ -76,7 +80,7 @@ By using this software, you acknowledge that you have read, understood, and agre
       {/* Content */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <AppHeader />
-        
+
         <main className="relative z-10 w-full py-8">
           <div className="w-full px-4 md:px-6 lg:px-8">
             {/* Two-column layout with 40/60 content split */}
@@ -101,20 +105,20 @@ By using this software, you acknowledge that you have read, understood, and agre
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                     {/* Title Bar - White background */}
                     <div className="bg-white px-4 py-3 border-b border-gray-200 rounded-t-lg shadow-sm">
-                      <label 
-                        htmlFor="disclaimer-text" 
+                      <label
+                        htmlFor="disclaimer-text"
                         className="text-lg font-bold text-black"
                       >
                         Disclaimer:
                       </label>
                     </div>
-                    
+
                     {/* Disclaimer Content - Minimal padding */}
                     <div className="p-0">
                       <textarea
                         id="disclaimer-text"
                         value={disclaimerText}
-                        onChange={(e) => setDisclaimerText(e.target.value)}
+                        onChange={e => setDisclaimerText(e.target.value)}
                         className="w-full h-[clamp(280px,34vh,440px)] p-4 border-0 resize-none focus:ring-2 focus:ring-brand-peach focus:outline-none text-sm leading-relaxed scrollbar-wide overflow-auto"
                         placeholder="Disclaimer text will appear here..."
                       />
@@ -132,16 +136,16 @@ By using this software, you acknowledge that you have read, understood, and agre
               <div className="min-w-0 flex flex-col justify-between min-h-full">
                 {/* Empty spacer div for top */}
                 <div></div>
-                
+
                 {/* Button group - bottom-left on desktop, left-aligned on mobile */}
                 <div className="mt-auto mb-8 ml-0 lg:ml-6 flex flex-col space-y-4 self-start">
-                  <Link 
-                    href="/menu" 
+                  <Link
+                    href="/menu"
                     className="inline-flex items-center justify-center font-bold px-10 py-3 text-white bg-brand-red hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none transition-all duration-200"
                   >
                     ACCEPT
                   </Link>
-                  
+
                   <button
                     onClick={handleExit}
                     className="inline-flex items-center justify-center font-bold px-10 py-3 text-white bg-brand-red hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none transition-all duration-200"
@@ -159,9 +163,7 @@ By using this software, you acknowledge that you have read, understood, and agre
               </div>
             </div>
           </div>
-
         </main>
-        
       </div>
     </div>
   );

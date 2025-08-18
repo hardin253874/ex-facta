@@ -14,11 +14,23 @@ export interface NewPrimaryLoadCasesComponentProps {
 
 const NewPrimaryLoadCasesComponent: React.FC<
   NewPrimaryLoadCasesComponentProps
-> = ({ value, onChange, selectedIndex: externalSelectedIndex, onSelectIndex, onAddAxialRequested, onEditMovingRequested }) => {
-  const [internalSelectedIndex, setInternalSelectedIndex] = useState<number | null>(null);
-  
+> = ({
+  value,
+  onChange,
+  selectedIndex: externalSelectedIndex,
+  onSelectIndex,
+  onAddAxialRequested,
+  onEditMovingRequested,
+}) => {
+  const [internalSelectedIndex, setInternalSelectedIndex] = useState<
+    number | null
+  >(null);
+
   // Use external selection if provided, otherwise use internal
-  const selectedIndex = externalSelectedIndex !== undefined ? externalSelectedIndex : internalSelectedIndex;
+  const selectedIndex =
+    externalSelectedIndex !== undefined
+      ? externalSelectedIndex
+      : internalSelectedIndex;
   const setSelectedIndex = onSelectIndex || setInternalSelectedIndex;
 
   // Auto-select first item when list is not empty

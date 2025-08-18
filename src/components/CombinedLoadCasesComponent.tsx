@@ -12,15 +12,14 @@ interface CombinedLoadCasesComponentProps {
 
 const MAX_CLCS = 20;
 
-const CombinedLoadCasesComponent: React.FC<CombinedLoadCasesComponentProps> = ({ 
-  value, 
-  onChange, 
+const CombinedLoadCasesComponent: React.FC<CombinedLoadCasesComponentProps> = ({
+  value,
+  onChange,
   onNewRequested,
   selectedIndex,
   onSelectionChange,
-  primaryLoadCases: _primaryLoadCases
+  primaryLoadCases: _primaryLoadCases, // eslint-disable-line @typescript-eslint/no-unused-vars
 }) => {
-
   // Add new CLC
   const handleAddCLC = () => {
     if (value.length >= MAX_CLCS) return;
@@ -28,7 +27,7 @@ const CombinedLoadCasesComponent: React.FC<CombinedLoadCasesComponentProps> = ({
       Name: `C. Load Case ${value.length + 1}`,
       Cases: [],
       Type: 'Strength',
-      DeflectionLimit: 0
+      DeflectionLimit: 0,
     };
     const updatedCLCs = [...value, newCLC];
     onChange(updatedCLCs);
@@ -41,14 +40,19 @@ const CombinedLoadCasesComponent: React.FC<CombinedLoadCasesComponentProps> = ({
     if (selectedIndex === null) return;
     const updatedCLCs = value.filter((_, idx) => idx !== selectedIndex);
     onChange(updatedCLCs);
-    onSelectionChange(updatedCLCs.length === 0 ? null : Math.max(0, selectedIndex - 1));
+    onSelectionChange(
+      updatedCLCs.length === 0 ? null : Math.max(0, selectedIndex - 1)
+    );
   };
 
   // Rename CLC
   const handleRename = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (selectedIndex === null) return;
     const updatedCLCs = [...value];
-    updatedCLCs[selectedIndex] = { ...updatedCLCs[selectedIndex], Name: e.target.value };
+    updatedCLCs[selectedIndex] = {
+      ...updatedCLCs[selectedIndex],
+      Name: e.target.value,
+    };
     onChange(updatedCLCs);
   };
 
@@ -67,7 +71,10 @@ const CombinedLoadCasesComponent: React.FC<CombinedLoadCasesComponentProps> = ({
     if (selectedIndex === null) return;
     const deflectionValue = parseInt(e.target.value) || 0;
     const updatedCLCs = [...value];
-    updatedCLCs[selectedIndex] = { ...updatedCLCs[selectedIndex], DeflectionLimit: deflectionValue };
+    updatedCLCs[selectedIndex] = {
+      ...updatedCLCs[selectedIndex],
+      DeflectionLimit: deflectionValue,
+    };
     onChange(updatedCLCs);
   };
 
@@ -97,7 +104,8 @@ const CombinedLoadCasesComponent: React.FC<CombinedLoadCasesComponentProps> = ({
                 }`}
                 onClick={() => onSelectionChange(idx)}
                 onKeyDown={e => {
-                  if (e.key === 'Enter' || e.key === ' ') onSelectionChange(idx);
+                  if (e.key === 'Enter' || e.key === ' ')
+                    onSelectionChange(idx);
                 }}
               >
                 {clc.Name}

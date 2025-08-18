@@ -5,9 +5,7 @@ interface AppHeaderProps {
   className?: string;
 }
 
-const AppHeader: React.FC<AppHeaderProps> = ({
-  className = "",
-}) => {
+const AppHeader: React.FC<AppHeaderProps> = ({ className = '' }) => {
   return (
     <header className={`${className}`}>
       {/* Row 1: White background with logo and text */}
@@ -26,9 +24,12 @@ const AppHeader: React.FC<AppHeaderProps> = ({
           </span>
         </div>
       </div>
-      
+
       {/* Row 2: Banner image */}
-      <div className="relative w-full overflow-hidden" style={{ height: 'clamp(48px, 8vw, 96px)' }}>
+      <div
+        className="relative w-full overflow-hidden"
+        style={{ height: 'clamp(48px, 8vw, 96px)' }}
+      >
         <Image
           src="/images/EX-facta-banner.png"
           alt=""

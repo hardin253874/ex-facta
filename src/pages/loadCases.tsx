@@ -12,7 +12,13 @@ import LoadDetailComponent from '@/components/LoadDetailComponent';
 import AxialLoadComponent from '@/components/AxialLoadComponent';
 import MovingLoadComponent from '@/components/MovingLoadComponent';
 import type { Project } from '@/types';
-import type { PrimaryLoadCase, CombinedLoadCase, LoadCase, AxialLoad, MovingLoad } from '@/types/loadCases';
+import type {
+  PrimaryLoadCase,
+  CombinedLoadCase,
+  LoadCase,
+  AxialLoad,
+  MovingLoad,
+} from '@/types/loadCases';
 
 const LoadCases: React.FC = () => {
   const [project, setProject] = useState<Project>({
@@ -24,31 +30,57 @@ const LoadCases: React.FC = () => {
   const [loadCaseType, setLoadCaseType] = useState<'PLC' | 'CLC'>('PLC');
 
   // Lists of load cases
-  const [primaryLoadCases, setPrimaryLoadCases] = useState<PrimaryLoadCase[]>([]);
-  const [combinedLoadCases, setCombinedLoadCases] = useState<CombinedLoadCase[]>([]);
+  const [primaryLoadCases, setPrimaryLoadCases] = useState<PrimaryLoadCase[]>(
+    []
+  );
+  const [combinedLoadCases, setCombinedLoadCases] = useState<
+    CombinedLoadCase[]
+  >([]);
 
   // Selected indices
   const [selectedPLCIndex, setSelectedPLCIndex] = useState<number | null>(null);
   const [selectedCLCIndex, setSelectedCLCIndex] = useState<number | null>(null);
 
   // Right panel editor mode
-  const [rightEditorMode, setRightEditorMode] = useState<'plc' | 'clc' | null>(null);
-  const [rightEditorPLC, setRightEditorPLC] = useState<PrimaryLoadCase | null>(null);
-  const [rightEditorCLC, setRightEditorCLC] = useState<CombinedLoadCase | null>(null);
-  
+  const [rightEditorMode, setRightEditorMode] = useState<'plc' | 'clc' | null>(
+    null
+  );
+  const [rightEditorPLC, setRightEditorPLC] = useState<PrimaryLoadCase | null>(
+    null
+  );
+  const [rightEditorCLC, setRightEditorCLC] = useState<CombinedLoadCase | null>(
+    null
+  );
+
   // Selected LoadCase index for PLC editor
-  const [selectedPLCLoadIndex, setSelectedPLCLoadIndex] = useState<number | null>(null);
-  
+  const [selectedPLCLoadIndex, setSelectedPLCLoadIndex] = useState<
+    number | null
+  >(null);
+
   // Axial data by load index (local page state; do not mutate LoadCase type yet)
-  const [axialByLoadIndex, setAxialByLoadIndex] = useState<Record<number, AxialLoad>>({});
-  
+  const [axialByLoadIndex, setAxialByLoadIndex] = useState<
+    Record<number, AxialLoad>
+  >({});
+
   // Moving load data per selected load
-  const [movingByLoadIndex, setMovingByLoadIndex] = useState<Record<number, MovingLoad>>({});
-  
+  const [movingByLoadIndex, setMovingByLoadIndex] = useState<
+    Record<number, MovingLoad>
+  >({});
+
   // Helper to create default moving load
   const defaultMoving = (): MovingLoad => ({
-    LeftBound: { Title: 'Left Bound', PointOfReference: 'leftEnd', LengthType: 'length', Length: 0 },
-    RightBound: { Title: 'Right Bound', PointOfReference: 'rightEnd', LengthType: 'length', Length: 0 },
+    LeftBound: {
+      Title: 'Left Bound',
+      PointOfReference: 'leftEnd',
+      LengthType: 'length',
+      Length: 0,
+    },
+    RightBound: {
+      Title: 'Right Bound',
+      PointOfReference: 'rightEnd',
+      LengthType: 'length',
+      Length: 0,
+    },
     WidthMM: 0,
     Units: 'kPa',
     PressureKPa: 0,
@@ -76,7 +108,9 @@ const LoadCases: React.FC = () => {
           {/* Left Panel */}
           <div className="md:w-1/4 space-y-4">
             <div className="bg-white rounded-lg shadow-sm p-4">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">Load Cases</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                Load Cases
+              </h2>
 
               {/* Load Case Type */}
               <LoadCaseTypeSelector
@@ -92,7 +126,7 @@ const LoadCases: React.FC = () => {
                     onChange={setPrimaryLoadCases}
                     selectedIndex={selectedPLCIndex}
                     onSelectionChange={setSelectedPLCIndex}
-                    onNewRequested={(newPLC) => {
+                    onNewRequested={newPLC => {
                       setRightEditorMode('plc');
                       setRightEditorPLC(newPLC);
                     }}
@@ -109,7 +143,7 @@ const LoadCases: React.FC = () => {
                     selectedIndex={selectedCLCIndex}
                     onSelectionChange={setSelectedCLCIndex}
                     primaryLoadCases={availablePrimaryLoads}
-                    onNewRequested={(newCLC) => {
+                    onNewRequested={newCLC => {
                       setRightEditorMode('clc');
                       setRightEditorCLC(newCLC);
                     }}
@@ -126,7 +160,7 @@ const LoadCases: React.FC = () => {
                   className="w-full rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 p-2 text-sm min-h-[120px]"
                   placeholder="Enter comments for this load case…"
                   value={caseComments}
-                  onChange={(e) => setCaseComments(e.target.value)}
+                  onChange={e => setCaseComments(e.target.value)}
                 />
               </div>
 
@@ -166,7 +200,7 @@ const LoadCases: React.FC = () => {
                 </h2>
                 <NewPrimaryLoadCasesComponent
                   value={rightEditorPLC}
-                  onChange={(updated) => {
+                  onChange={updated => {
                     setRightEditorPLC(updated);
                     // If a load was just added, select it
                     if (updated.Cases.length > rightEditorPLC.Cases.length) {
@@ -175,61 +209,78 @@ const LoadCases: React.FC = () => {
                   }}
                   selectedIndex={selectedPLCLoadIndex}
                   onSelectIndex={setSelectedPLCLoadIndex}
-                  onAddAxialRequested={(idx) => {
+                  onAddAxialRequested={idx => {
                     // Initialize axial data for this load if missing
                     setAxialByLoadIndex(prev => ({
                       ...prev,
-                      [idx]: prev[idx] ?? { Value: 0, Type: 'Tension' }
+                      [idx]: prev[idx] ?? { Value: 0, Type: 'Tension' },
                     }));
                     setSelectedPLCLoadIndex(idx); // ensure we're editing this one
                   }}
-                  onEditMovingRequested={(idx) => {
-                    setMovingByLoadIndex(prev => ({ ...prev, [idx]: prev[idx] ?? defaultMoving() }));
+                  onEditMovingRequested={idx => {
+                    setMovingByLoadIndex(prev => ({
+                      ...prev,
+                      [idx]: prev[idx] ?? defaultMoving(),
+                    }));
                     setSelectedPLCLoadIndex(idx);
                   }}
                 />
 
                 {/* Load Detail only if a load is selected */}
-                {selectedPLCLoadIndex !== null && rightEditorPLC.Cases[selectedPLCLoadIndex] && (
-                  <div className="mt-6">
-                    <LoadDetailComponent
-                      value={rightEditorPLC.Cases[selectedPLCLoadIndex]}
-                      onChange={(updatedLoad) => {
-                        const next = { ...rightEditorPLC, Cases: [...rightEditorPLC.Cases] };
-                        next.Cases[selectedPLCLoadIndex] = updatedLoad;
-                        setRightEditorPLC(next);
-                      }}
-                    />
-                  </div>
-                )}
+                {selectedPLCLoadIndex !== null &&
+                  rightEditorPLC.Cases[selectedPLCLoadIndex] && (
+                    <div className="mt-6">
+                      <LoadDetailComponent
+                        value={rightEditorPLC.Cases[selectedPLCLoadIndex]}
+                        onChange={updatedLoad => {
+                          const next = {
+                            ...rightEditorPLC,
+                            Cases: [...rightEditorPLC.Cases],
+                          };
+                          next.Cases[selectedPLCLoadIndex] = {
+                            ...updatedLoad,
+                            Name: rightEditorPLC.Cases[selectedPLCLoadIndex]
+                              .Name,
+                          };
+                          setRightEditorPLC(next);
+                        }}
+                      />
+                    </div>
+                  )}
 
                 {/* Axial load editor (ONLY when plc mode AND a load selected AND axial exists) */}
                 {rightEditorMode === 'plc' &&
-                 selectedPLCLoadIndex !== null &&
-                 axialByLoadIndex[selectedPLCLoadIndex] && (
-                  <div className="mt-6">
-                    <AxialLoadComponent
-                      value={axialByLoadIndex[selectedPLCLoadIndex]}
-                      onChange={(updated) =>
-                        setAxialByLoadIndex(prev => ({ ...prev, [selectedPLCLoadIndex]: updated }))
-                      }
-                    />
-                  </div>
-                )}
+                  selectedPLCLoadIndex !== null &&
+                  axialByLoadIndex[selectedPLCLoadIndex] && (
+                    <div className="mt-6">
+                      <AxialLoadComponent
+                        value={axialByLoadIndex[selectedPLCLoadIndex]}
+                        onChange={updated =>
+                          setAxialByLoadIndex(prev => ({
+                            ...prev,
+                            [selectedPLCLoadIndex]: updated,
+                          }))
+                        }
+                      />
+                    </div>
+                  )}
 
                 {/* Moving load editor (UNDER axial) */}
                 {rightEditorMode === 'plc' &&
-                 selectedPLCLoadIndex !== null &&
-                 movingByLoadIndex[selectedPLCLoadIndex] && (
-                  <div className="mt-6">
-                    <MovingLoadComponent
-                      value={movingByLoadIndex[selectedPLCLoadIndex]}
-                      onChange={(updated) =>
-                        setMovingByLoadIndex(prev => ({ ...prev, [selectedPLCLoadIndex]: updated }))
-                      }
-                    />
-                  </div>
-                )}
+                  selectedPLCLoadIndex !== null &&
+                  movingByLoadIndex[selectedPLCLoadIndex] && (
+                    <div className="mt-6">
+                      <MovingLoadComponent
+                        value={movingByLoadIndex[selectedPLCLoadIndex]}
+                        onChange={updated =>
+                          setMovingByLoadIndex(prev => ({
+                            ...prev,
+                            [selectedPLCLoadIndex]: updated,
+                          }))
+                        }
+                      />
+                    </div>
+                  )}
               </div>
             )}
 

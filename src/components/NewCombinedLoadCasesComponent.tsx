@@ -64,13 +64,13 @@ const NewCombinedLoadCasesComponent: React.FC<
       const newName = `${multiplier} * ${selectedCase.Name}`;
       // Skip duplicates
       if (!existingNames.has(newName)) {
-        newLoadCases.push({ 
+        newLoadCases.push({
           Name: newName,
           LoadType: 'UDL',
           LoadDirection: '',
           LoadApplication: '',
           Units: '',
-          Force: 0
+          Force: 0,
         });
         existingNames.add(newName);
         // Stop if we've reached max capacity

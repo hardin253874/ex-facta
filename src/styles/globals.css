@@ -21,27 +21,27 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   /* wider custom scrollbar for disclaimer textarea */
-  .scrollbar-wide::-webkit-scrollbar { 
-    width: 14px; 
-    height: 14px; 
+  .scrollbar-wide::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
   }
-  .scrollbar-wide::-webkit-scrollbar-track { 
-    background: rgba(0,0,0,0.08); 
-    border-radius: 8px; 
+  .scrollbar-wide::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
   }
-  .scrollbar-wide::-webkit-scrollbar-thumb { 
-    background: rgba(0,0,0,0.35); 
-    border-radius: 8px; 
+  .scrollbar-wide::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
   }
-  .scrollbar-wide::-webkit-scrollbar-thumb:hover { 
-    background: rgba(0,0,0,0.5); 
+  .scrollbar-wide::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
   }
 
   /* Firefox */
-  .scrollbar-wide { 
-    scrollbar-width: auto; 
-    scrollbar-color: rgba(0,0,0,0.35) rgba(0,0,0,0.08); 
+  .scrollbar-wide {
+    scrollbar-width: auto;
+    scrollbar-color: rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.08);
   }
 }

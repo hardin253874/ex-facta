@@ -133,6 +133,7 @@ export type LoadLocation = {
 ### Landing Page (`pages/index.tsx`)
 
 Professional disclaimer landing page featuring:
+
 - Full-viewport background image (`/images/background.png`)
 - AppHeader with two-row layout design (logo + banner)
 - No footer component (removed for cleaner design)
@@ -161,6 +162,7 @@ Load case management interface with primary and combined load case components
 ### Menu Page (`pages/menu.tsx`)
 
 Main menu page featuring:
+
 - Full-viewport background image from `/images/background.png`
 - AppHeader with two-row layout (logo + banner design)
 - CSS Grid layout with 40/60 content split (responsive stacking on mobile):
@@ -169,7 +171,7 @@ Main menu page featuring:
 - Hero banner constrained to left column with responsive height using CSS clamp
 - Six black buttons with white text in 2×3 grid layout with custom corner styling:
   - Row 1: **Exacta® Info**, **Stramit Info**
-  - Row 2: **Material Info**, **Sample Specification**  
+  - Row 2: **Material Info**, **Sample Specification**
   - Row 3: **About Us**, **Project Gallery**
 - Full-width red **Enter Projects** button with black text (routes to `/project`)
 - Custom asymmetric button corner styling (square top-left/bottom-right, rounded top-right/bottom-left)
@@ -257,6 +259,7 @@ The project was significantly evolved using Cursor IDE with detailed component s
 ### Recent Design Updates (AppHeader Redesign)
 
 **Header Component Redesign**:
+
 - Redesigned `AppHeader` with two-row layout matching new visual requirements
 - Row 1: White background with left-aligned EX-facta logo icon and "EX-facta™" text
 - Row 2: Full-width banner image that clips on right when viewport narrows (left-anchored)
@@ -264,21 +267,25 @@ The project was significantly evolved using Cursor IDE with detailed component s
 - Uses new assets: `EX-facta-logo.png` (1307×1136) and `EX-facta-banner.png` (10000×636)
 
 **Footer Component Removal**:
+
 - Deleted `AppFooter.tsx` component entirely for cleaner page design
 - Updated layout barrel exports to remove footer
 - Removed footer usage from both `pages/index.tsx` and `pages/menu.tsx`
 
 **Background Image Update**:
+
 - Updated both landing and menu pages to use `/images/background.png` instead of `.jpg`
 - Maintained existing full-viewport, object-cover behavior
 
 **Responsive Behavior**:
+
 - Logo and text in header row 1 never clip (flex-shrink-0, whitespace-nowrap)
 - Banner image in row 2 anchors left and clips right as viewport narrows (object-left)
 - No horizontal scrollbars introduced by design changes
 - Maintains accessibility with proper alt text and ARIA attributes
 
 **Brand Styling Refinements**:
+
 - Added brand red color (`#E4002B`) to Tailwind config under `brand.red`
 - Applied brand red to "EX-facta™" text in header for proper branding
 - Implemented responsive text sizing: `text-sm sm:text-base md:text-lg lg:text-xl`
