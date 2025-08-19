@@ -1,56 +1,62 @@
 # Ex-Facta
 
-**Engineering Materials Selection Platform**
+**Structural Engineering Purlin Design Application**
 
-Ex-Facta is a modern Next.js application designed to help engineers select building materials and models based on real-world use cases. The platform provides comprehensive material data, sustainability metrics, and interactive visualizations to support informed decision-making in engineering projects.
+Ex-Facta is a comprehensive structural engineering application built with Next.js for purlin design and load case analysis. The platform provides engineers with tools for configuring purlin systems, managing load cases, and analyzing structural designs with an intuitive web-based interface.
 
 ## 🚀 Features
 
-- **Material Database**: Comprehensive collection of engineering materials with detailed properties
-- **Interactive Charts**: D3.js-powered visualizations for material comparison and analysis
-- **Sustainability Metrics**: Environmental impact assessments for responsible material selection
-- **Responsive Design**: Modern, mobile-first UI built with Tailwind CSS
+- **Purlin Design System**: Complete configuration for Exacta-C and Exacta-Z purlin types
+- **Span Configuration**: Dynamic span setup with flexible length and sizing options
+- **Load Case Management**: Primary and combined load case configuration with strength/serviceability analysis
+- **Interactive Visualizations**: D3.js-powered plan canvas with zoom controls
+- **Professional UI**: Responsive design with accessibility features and brand styling
 - **TypeScript**: Full type safety throughout the application
-- **Modular Architecture**: Well-organized codebase following React best practices
+- **Component Architecture**: Modular React components following engineering design patterns
 
 ## 📁 Project Structure
 
 ```
 ex-facta/
 ├── src/
-│   ├── components/           # Reusable UI components
-│   │   ├── charts/          # D3.js chart components
-│   │   ├── Header.tsx       # Main navigation header
-│   │   └── MaterialCard.tsx # Material display cards
-│   ├── pages/               # Next.js pages (file-based routing)
-│   │   ├── _app.tsx        # App wrapper
-│   │   ├── _document.tsx   # HTML document structure
-│   │   └── index.tsx       # Home page
-│   ├── services/            # API and data service abstractions
-│   │   └── materialService.ts
-│   ├── hooks/               # Custom React hooks
-│   │   └── useMaterials.ts
-│   ├── utils/               # Helper functions
-│   │   └── index.ts
-│   ├── types/               # TypeScript type definitions
-│   │   └── index.ts
-│   └── styles/              # Global styles
-│       └── globals.css
-├── public/                  # Static assets
-├── tailwind.config.js      # Tailwind CSS configuration
-├── tsconfig.json           # TypeScript configuration
-├── next.config.js          # Next.js configuration
-├── package.json            # Project dependencies
-└── README.md               # This file
+│   ├── components/           # React components
+│   │   ├── layout/          # Layout components
+│   │   │   ├── AppHeader.tsx # Two-row header with logo and banner
+│   │   │   └── index.ts     # Barrel exports
+│   │   ├── BridgingConfigTable.tsx      # Bridging spacing configuration
+│   │   ├── CombinedLoadCasesComponent.tsx # Combined load cases management
+│   │   ├── Header.tsx                   # Original header component
+│   │   ├── LoadCaseTypeSelector.tsx     # Primary/Combined toggle
+│   │   ├── LoadLocationComponent.tsx    # Load position configuration
+│   │   ├── PlanCanvas.tsx              # D3-based visualization
+│   │   ├── PrimaryLoadCasesComponent.tsx # Primary load cases management
+│   │   ├── ProjectForm.tsx             # Project name and description
+│   │   ├── PurlinSizeModeSelector.tsx  # Size mode selection
+│   │   ├── PurlinTypeSelector.tsx      # Exacta-C/Z toggle
+│   │   ├── SheetingRestraintSelector.tsx # Yes/No restraint toggle
+│   │   ├── SpanConfigTable.tsx         # Span lengths and sizes
+│   │   ├── SpanNumberInput.tsx         # Number of spans input
+│   │   ├── SpanTypeSelector.tsx        # 9-option span configurations
+│   │   └── SupportConfigTable.tsx      # Support lap configuration
+│   ├── pages/               # Next.js pages
+│   │   ├── index.tsx       # Landing page with disclaimer
+│   │   ├── project.tsx     # Main project configuration
+│   │   ├── loadCases.tsx   # Load cases configuration
+│   │   └── menu.tsx        # Main menu with full-screen background
+│   ├── types/              # TypeScript type definitions
+│   │   ├── index.ts        # Core types (Material, Project, SpanInfo)
+│   │   └── loadCases.ts    # Load case related types
+│   └── services/           # API services
+└── public/images/          # Project assets (icons, banners, backgrounds)
 ```
 
 ## 🛠 Tech Stack
 
-- **Frontend**: Next.js 14+, React 18, TypeScript
-- **Styling**: Tailwind CSS
-- **Charts**: D3.js
-- **Package Manager**: pnpm
-- **Linting**: ESLint + Prettier
+- **Frontend**: Next.js, React 18, TypeScript
+- **Styling**: Tailwind CSS with custom brand colors
+- **Visualizations**: D3.js
+- **Package Manager**: npm
+- **Linting**: ESLint
 - **Build Tool**: Next.js built-in bundler
 
 ## 📋 Prerequisites
@@ -58,7 +64,7 @@ ex-facta/
 Before running this project, make sure you have the following installed:
 
 - Node.js (version 18 or higher)
-- pnpm (recommended) or npm
+- npm
 
 ## 🚀 Getting Started
 
@@ -72,72 +78,89 @@ Before running this project, make sure you have the following installed:
 2. **Install dependencies**:
 
    ```bash
-   pnpm install
+   npm install
    ```
 
 3. **Run the development server**:
 
    ```bash
-   pnpm dev
+   npm run dev
    ```
 
 4. **Open your browser** and navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 📜 Available Scripts
 
-- `pnpm dev` - Start development server
-- `pnpm build` - Create production build
-- `pnpm start` - Start production server
-- `pnpm lint` - Run ESLint
-- `pnpm lint:fix` - Fix ESLint issues automatically
-- `pnpm format` - Format code with Prettier
-- `pnpm type-check` - Run TypeScript type checking
+- `npm run dev` - Start development server
+- `npm run build` - Create production build
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
 ## 🎨 Key Components
 
-### ExampleChart
+### Layout Components
 
-Interactive D3.js bar chart component located in `src/components/charts/ExampleChart.tsx`. Features:
+**AppHeader**: Professional two-row header component featuring:
+- Row 1: White background with EX-facta logo and branded text
+- Row 2: Full-width banner image with responsive clipping
+- Brand red styling and responsive typography
 
-- Responsive SVG rendering
-- Interactive tooltips
-- Customizable dimensions and margins
-- Color-coded data visualization
+### Purlin Design Components
 
-### MaterialCard
+**PurlinTypeSelector**: Toggle between Exacta-C and Exacta-Z purlin types with visual icons
 
-Displays material information in a clean, card-based layout:
+**SpanTypeSelector**: Vertical list of 9 span configuration options with corresponding imagery
 
-- Material properties and specifications
-- Sustainability scoring with visual indicators
-- Cost information and use cases
-- Responsive design for all screen sizes
+**SpanConfigTable**: Dynamic table for managing span lengths and purlin sizes based on span count
 
-### Material Service
+**SupportConfigTable**: Configuration interface for support lap percentages
 
-Handles data fetching and management:
+**BridgingConfigTable**: Bridging spacing configuration per span with field inputs
 
-- Mock data service with realistic material information
-- Async/await pattern for future API integration
-- TypeScript interfaces for type safety
+### Load Case Management
 
-## 🌱 Sustainability Features
+**PrimaryLoadCasesComponent**: Manage up to 20 primary load cases with strength/serviceability classification
 
-Ex-Facta emphasizes sustainable material selection through:
+**CombinedLoadCasesComponent**: Combined load case management with deflection limits
 
-- Sustainability scoring system (0-100%)
-- Environmental impact factors
-- Carbon footprint considerations
-- Renewable and recycled content tracking
+**LoadLocationComponent**: Configure load positions along spans with reference points
+
+### Visualization
+
+**PlanCanvas**: D3.js-based structural visualization with zoom controls and interactive features
+
+## 🏗️ Application Pages
+
+### Landing Page (`pages/index.tsx`)
+Professional disclaimer page with full-viewport background, hero banner, disclaimer panel, and Accept/Exit buttons with accessibility features.
+
+### Menu Page (`pages/menu.tsx`)
+Main navigation interface featuring:
+- 2×3 button grid for information modals (Exacta® Info, Stramit Info, Material Info, Sample Specification, About Us, Project Gallery)
+- Full-width "Enter Projects" button
+- Comprehensive modal system with dual-section editable content
+
+### Project Page (`pages/project.tsx`)
+Main configuration interface with left/right panel layout for purlin type selection, span configuration, and project settings.
+
+### Load Cases Page (`pages/loadCases.tsx`)
+Dedicated interface for managing primary and combined load cases with detailed configuration options.
+
+## 🔧 Development Features
+
+- **TypeScript Integration**: Full type safety with custom interfaces for Project, SpanInfo, LoadCase, and BridgingSpacingInfo
+- **Accessibility**: Focus trap implementation, keyboard navigation, ARIA attributes, and screen reader support
+- **Responsive Design**: Mobile-first approach with CSS Grid layouts and responsive breakpoints
+- **Component Architecture**: Modular design with barrel exports and reusable utility components
 
 ## 🔮 Future Enhancements
 
-- Real-time material pricing integration
-- Advanced filtering and search capabilities
-- Material comparison tools
-- User authentication and project saving
-- API integration with material suppliers
-- Mobile application development
+- Complete D3 visualization implementation in PlanCanvas component
+- Form validation across all input components
+- Data persistence and save/load functionality
+- PDF/report generation capabilities
+- Enhanced testing suite with unit and integration tests
+- Performance optimization for complex table re-rendering
 
 ## 🤝 Contributing
 
@@ -157,4 +180,4 @@ For support, please contact the development team or create an issue in the repos
 
 ---
 
-Built with ❤️ for engineers, by engineers.
+Built for structural engineers with precision and performance in mind.

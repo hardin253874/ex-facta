@@ -55,10 +55,6 @@ Respect existing folder structure:
 - public/
 - styles/
 
-# Azure Deployment
-Project must be deployable on Azure Static Web Apps or Azure App Service.
-All environment variables must be referenced using `process.env`.
-
 # Comments
 Prefer minimal, high-value comments.
 Let code be self-explanatory where possible.
