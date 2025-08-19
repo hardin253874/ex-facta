@@ -342,7 +342,7 @@ const MenuPage: React.FC = () => {
                   <div className="mt-5">
                     <Link
                       href="/project"
-                      className="w-full inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-black font-semibold px-8 py-4 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 transition-all duration-200"
+                      className="w-full inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-4 shadow-md rounded-tr-lg rounded-bl-lg rounded-tl-none rounded-br-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700 transition-all duration-200"
                     >
                       Enter Projects
                     </Link>
