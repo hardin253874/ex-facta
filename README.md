@@ -101,6 +101,7 @@ Before running this project, make sure you have the following installed:
 ### Layout Components
 
 **AppHeader**: Professional two-row header component featuring:
+
 - Row 1: White background with EX-facta logo and branded text
 - Row 2: Full-width banner image with responsive clipping
 - Brand red styling and responsive typography
@@ -132,18 +133,23 @@ Before running this project, make sure you have the following installed:
 ## 🏗️ Application Pages
 
 ### Landing Page (`pages/index.tsx`)
+
 Professional disclaimer page with full-viewport background, hero banner, disclaimer panel, and Accept/Exit buttons with accessibility features.
 
 ### Menu Page (`pages/menu.tsx`)
+
 Main navigation interface featuring:
+
 - 2×3 button grid for information modals (Exacta® Info, Stramit Info, Material Info, Sample Specification, About Us, Project Gallery)
 - Full-width "Enter Projects" button
 - Comprehensive modal system with dual-section editable content
 
 ### Project Page (`pages/project.tsx`)
+
 Main configuration interface with left/right panel layout for purlin type selection, span configuration, and project settings.
 
 ### Load Cases Page (`pages/loadCases.tsx`)
+
 Dedicated interface for managing primary and combined load cases with detailed configuration options.
 
 ## 🔧 Development Features

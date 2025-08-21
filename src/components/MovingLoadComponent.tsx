@@ -287,4 +287,5 @@ const MovingLoadComponent: React.FC<MovingLoadComponentProps> = ({
   );
 };
 
+export { LoadLocationSubComponent };
 export default MovingLoadComponent;

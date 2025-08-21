@@ -11,6 +11,7 @@ import NewCombinedLoadCasesComponent from '@/components/NewCombinedLoadCasesComp
 import LoadDetailComponent from '@/components/LoadDetailComponent';
 import AxialLoadComponent from '@/components/AxialLoadComponent';
 import MovingLoadComponent from '@/components/MovingLoadComponent';
+import { LoadLocationSubComponent } from '@/components/MovingLoadComponent';
 import type { Project } from '@/types';
 import type {
   PrimaryLoadCase,
@@ -18,6 +19,7 @@ import type {
   LoadCase,
   AxialLoad,
   MovingLoad,
+  LoadLocation,
 } from '@/types/loadCases';
 
 const LoadCases: React.FC = () => {
@@ -67,6 +69,11 @@ const LoadCases: React.FC = () => {
     Record<number, MovingLoad>
   >({});
 
+  // LoadLocation data per load index
+  const [locationByLoadIndex, setLocationByLoadIndex] = useState<
+    Record<number, LoadLocation>
+  >({});
+
   // Helper to create default moving load
   const defaultMoving = (): MovingLoad => ({
     LeftBound: {
@@ -86,6 +93,14 @@ const LoadCases: React.FC = () => {
     PressureKPa: 0,
     PurlinSpacingMM: 0,
     NumTestPositions: 20,
+  });
+
+  // Helper to create default location
+  const defaultLocation = (): LoadLocation => ({
+    Title: 'Load Location',
+    PointOfReference: 'leftEnd',
+    LengthType: 'length',
+    Length: 0,
   });
 
   // Optional: source list for building a CLC (can be fed from PLCs later)
@@ -245,6 +260,28 @@ const LoadCases: React.FC = () => {
                           setRightEditorPLC(next);
                         }}
                       />
+
+                      {/* Conditional LoadLocation */}
+                      {(rightEditorPLC.Cases[selectedPLCLoadIndex]
+                        .LoadApplication === 'part' ||
+                        rightEditorPLC.Cases[selectedPLCLoadIndex]
+                          .LoadApplication === 'wind') && (
+                        <div className="mt-6">
+                          <LoadLocationSubComponent
+                            title="Load Location"
+                            value={
+                              locationByLoadIndex[selectedPLCLoadIndex] ??
+                              defaultLocation()
+                            }
+                            onChange={updatedLoc =>
+                              setLocationByLoadIndex(prev => ({
+                                ...prev,
+                                [selectedPLCLoadIndex]: updatedLoc,
+                              }))
+                            }
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
 
