@@ -27,7 +27,7 @@ export type LoadLocation = {
 export type Load = {
   LoadType: 'UDL' | 'Point' | 'Line';
   LoadDirection: 'parallel' | 'perpendicular' | '';
-  LoadApplication: 'part' | 'one' | 'multiple' | 'all' | '';
+  LoadApplication: 'part' | 'one' | 'multiple' | 'all' | 'wind' | '';
   Units: 'kN/m' | 'kN' | 'kPa' | '';
   Force: number;
 };

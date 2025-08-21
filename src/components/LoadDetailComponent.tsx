@@ -31,7 +31,7 @@ const LoadDetailComponent: React.FC<LoadDetailComponentProps> = ({
   };
 
   const handleLoadApplicationChange = (
-    application: 'part' | 'one' | 'multiple' | 'all'
+    application: 'part' | 'one' | 'multiple' | 'all' | 'wind'
   ) => {
     onChange({ ...value, LoadApplication: application });
   };
@@ -130,6 +130,7 @@ const LoadDetailComponent: React.FC<LoadDetailComponentProps> = ({
               { value: 'one', label: 'One Span' },
               { value: 'multiple', label: 'Multiple Spans' },
               { value: 'all', label: 'All Spans' },
+              { value: 'wind', label: 'Wind Load' },
             ].map(option => (
               <button
                 key={option.value}
@@ -137,7 +138,7 @@ const LoadDetailComponent: React.FC<LoadDetailComponentProps> = ({
                 aria-checked={value.LoadApplication === option.value}
                 onClick={() =>
                   handleLoadApplicationChange(
-                    option.value as 'part' | 'one' | 'multiple' | 'all'
+                    option.value as 'part' | 'one' | 'multiple' | 'all' | 'wind'
                   )
                 }
                 className={`px-4 py-2 rounded-md border transition-colors ${
